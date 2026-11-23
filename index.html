@@ -1,0 +1,1150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pixelance</title>
+<meta name="description" content="Pixelance builds virtual reality training in Unreal Engine for Meta Quest, so teams can practice real tasks safely before doing them on the job.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pixelance">
+<meta property="og:title" content="Pixelance · Turning pixels into practice">
+<meta property="og:description" content="We build virtual reality experiences that make training safer and more effective.">
+<meta property="og:url" content="https://pixelancestudio.com/">
+<meta property="og:image" content="https://pixelancestudio.com/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Pixelance website: a VR workbench with a floating checklist and a controller pointer">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 22 22%27%3E%3Cpath d=%27M11 1.5 20 6.5 11 11.5 2 6.5Z%27 fill=%27%232463AE%27/%3E%3Cpath d=%27M2 6.5 11 11.5 11 21 2 16Z%27 fill=%27%232A2F34%27/%3E%3Cpath d=%27M20 6.5 11 11.5 11 21 20 16Z%27 fill=%27%238DB8EE%27/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500&family=Sora:wght@400;500;600&family=Inter:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: cool silver-white system; centered column, alternating feature rows, each visual set in a large soft-tinted rounded panel built from the brand cube */
+:root {
+  --bg: #F6F7F8;
+  --surface: #FFFFFF;
+  --ink: #15171A;
+  --muted: #5D646C;
+  --line: #E1E5E8;
+  --accent: #1D5A9E;
+  --accent-soft: #DCE8F7;
+  --panel-mist: #E2EAF4;
+  --m-top-a: #FFFFFF; --m-top-b: #E4E8EB;
+  --m-left-a: #C9D0D5; --m-left-b: #9AA3AA;
+  --m-right-a: #EEF1F3; --m-right-b: #C3CAD0;
+  --t-top-a: #79AEF0; --t-top-b: #2F6FC0;
+  --t-left-a: #4A5056; --t-left-b: #24282C;
+  --t-right-a: #AFCEF5; --t-right-b: #6699DB;
+  --hero-top: #FFFFFF;
+  --hero-bot: #E7EAED;
+  --grid-line: #B9C0C6;
+  --silver-hi: #FFFFFF;
+  --silver-mid: #D3D8DC;
+  --silver-lo: #9AA2A9;
+  --silver-edge: rgba(255, 255, 255, 0.85);
+  --silver-glow: rgba(255, 255, 255, 0.95);
+  --silver-glow-0: rgba(255, 255, 255, 0);
+  --silver-type-a: rgba(140, 150, 160, 0.6);
+  --silver-type-b: rgba(160, 168, 175, 0);
+  --panel-oat: #ECEEF0;
+  --panel-sage: #E5E9EF;
+  --panel-fog: #EAECEF;
+  --vx-n-top: #FCFDFD;
+  --vx-n-left: #C5CCD2;
+  --vx-n-right: #E0E5E9;
+  --vx-edge: rgba(255, 255, 255, 0.7);
+  --logo-a: #3A7BD5;
+  --logo-b: #3F3F3F;
+  --logo-c: #8DB8EE;
+  --font-logo: "Outfit", "Futura", system-ui, sans-serif;
+  --font-display: "Sora", "Futura", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141517; --surface: #1D1F22; --ink: #EEF0F2; --muted: #9BA2A9; --line: #2C3034;
+    --accent: #6CA2EA; --accent-soft: #1C2C44;
+    --panel-mist: #1B2533; --m-top-a: #6A7178; --m-top-b: #474D53; --m-left-a: #33383D; --m-left-b: #1F2327; --m-right-a: #4A5056; --m-right-b: #2E3337; --t-top-a: #79AEF0; --t-top-b: #2F6FC0; --t-left-a: #D6DBDF; --t-left-b: #9EA6AD; --t-right-a: #3B72B8; --t-right-b: #1F4F8A; --hero-top: #2A2C2F; --hero-bot: #141517; --grid-line: #4A5057; --silver-hi: #E6E9EC; --silver-mid: #8C949B; --silver-lo: #3C4146; --silver-edge: rgba(255,255,255,0.25); --silver-glow: rgba(180,200,210,0.16); --silver-glow-0: rgba(180,200,210,0); --silver-type-a: rgba(200,206,212,0.28); --silver-type-b: rgba(200,206,212,0); --panel-oat: #202326; --panel-sage: #1F242C; --panel-fog: #212327;
+    --vx-n-top: #4B5157; --vx-n-left: #2A2E32; --vx-n-right: #3B4045; --vx-edge: rgba(0,0,0,0.25);
+    --logo-a: #6CA2EA; --logo-b: #E8E6DF; --logo-c: #2C5F9E;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141517; --surface: #1D1F22; --ink: #EEF0F2; --muted: #9BA2A9; --line: #2C3034;
+  --accent: #6CA2EA; --accent-soft: #1C2C44;
+  --panel-mist: #1B2533; --m-top-a: #6A7178; --m-top-b: #474D53; --m-left-a: #33383D; --m-left-b: #1F2327; --m-right-a: #4A5056; --m-right-b: #2E3337; --t-top-a: #79AEF0; --t-top-b: #2F6FC0; --t-left-a: #D6DBDF; --t-left-b: #9EA6AD; --t-right-a: #3B72B8; --t-right-b: #1F4F8A; --hero-top: #2A2C2F; --hero-bot: #141517; --grid-line: #4A5057; --silver-hi: #E6E9EC; --silver-mid: #8C949B; --silver-lo: #3C4146; --silver-edge: rgba(255,255,255,0.25); --silver-glow: rgba(180,200,210,0.16); --silver-glow-0: rgba(180,200,210,0); --silver-type-a: rgba(200,206,212,0.28); --silver-type-b: rgba(200,206,212,0); --panel-oat: #202326; --panel-sage: #1F242C; --panel-fog: #212327;
+  --vx-n-top: #4B5157; --vx-n-left: #2A2E32; --vx-n-right: #3B4045; --vx-edge: rgba(0,0,0,0.25);
+  --logo-a: #6CA2EA; --logo-b: #E8E6DF; --logo-c: #2C5F9E;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+section[id] { scroll-margin-top: 0; }
+section#services, section#work { scroll-margin-top: 104px; }
+section#contact { scroll-margin-top: 40px; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 16px/1.65 var(--font-body); }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+.wrap { max-width: 1160px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.label { font: 500 12px/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+h1, h2, h3 { text-wrap: balance; }
+em { font-style: normal; color: var(--accent); }
+
+/* Header */
+header { position: fixed; top: 0; left: 0; right: 0; z-index: 20; padding-block: 18px; padding-top: calc(18px + env(safe-area-inset-top, 0px)); transition: background-color .3s ease, box-shadow .3s ease, padding .3s ease; }
+header.scrolled { background: color-mix(in srgb, var(--bg) 78%, transparent); -webkit-backdrop-filter: blur(14px) saturate(1.4); backdrop-filter: blur(14px) saturate(1.4); box-shadow: 0 1px 0 var(--line); padding-block: 12px; }
+header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.brand { text-decoration: none; }
+.wordmark { display: inline-flex; align-items: baseline; font: 500 26px/1 var(--font-logo); letter-spacing: -0.02em; color: var(--logo-b); }
+.wordmark .cube { width: 0.62em; height: 0.62em; margin: 0 0.04em; position: relative; top: 0.06em; }
+.cube .t { fill: var(--logo-a); } .cube .l { fill: var(--logo-b); } .cube .r { fill: var(--logo-c); }
+nav { display: flex; align-items: center; gap: 28px; }
+nav a { text-decoration: none; font-size: 15px; color: var(--muted); }
+nav a:hover { color: var(--ink); }
+nav .btn { color: var(--bg); }
+
+
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 12px; font: 500 15px/1 var(--font-body); text-decoration: none; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+.btn:hover { border-color: var(--muted); }
+.btn.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.btn.primary:hover { opacity: .9; }
+
+/* Hero: silver studio floor, a perspective wire grid with the brand cube floating over it */
+.hero { position: relative; overflow: hidden; background: radial-gradient(120% 80% at 50% 0%, var(--hero-top) 0%, var(--hero-bot) 70%); text-align: center; isolation: isolate; min-height: clamp(700px, 100vh, 1100px); display: flex; flex-direction: column; }
+.hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; display: block; }
+.hero .wrap { padding-block: clamp(150px, 23vh, 230px) 0; pointer-events: none; position: relative; z-index: 1; }
+.hero .wrap a { pointer-events: auto; }
+.hero h1 { font: 600 clamp(38px, 5vw, 64px)/1.06 var(--font-display); letter-spacing: -0.04em; margin: 22px auto 22px; max-width: 13em; }
+.hero h1 em { background: linear-gradient(100deg, var(--accent) 0%, var(--logo-c) 50%, var(--accent) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero .lead { font-size: 18px; color: var(--muted); max-width: 32em; margin: 0 auto 36px; }
+.cta { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+.giant { position: absolute; left: 0; right: 0; bottom: -0.2em; z-index: 0; margin: 0; font: 500 clamp(96px, 21vw, 330px)/1 var(--font-logo); letter-spacing: -0.06em; text-align: center; white-space: nowrap; pointer-events: none; user-select: none; background: linear-gradient(180deg, var(--silver-type-a) 0%, var(--silver-type-b) 70%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+@media (max-width: 760px) { .hero { min-height: 820px; } }
+.facts-wrap { margin-top: 40px; display: flex; justify-content: center; }
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; width: 100%; background: var(--line); border-radius: 16px; overflow: hidden; border: 1px solid var(--line); text-align: left; }
+.facts div { background: var(--surface); padding: 18px 20px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.facts b { font-weight: 500; font-size: 15px; }
+.facts span { font-size: 14px; color: var(--muted); }
+@media (max-width: 760px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.shadow { fill: var(--logo-b); opacity: 0.08; }
+@media (prefers-reduced-motion: no-preference) {
+  .burst { animation: burst 7s cubic-bezier(0.6, 0, 0.3, 1) infinite; }
+  @keyframes burst { 0%, 30% { transform: none; } 45%, 65% { transform: translate(var(--dx), var(--dy)); } 80%, 100% { transform: none; } }
+  .stage .shadow { animation: shadow 7s cubic-bezier(0.6, 0, 0.3, 1) infinite; transform-origin: center; transform-box: fill-box; }
+  @keyframes shadow { 0%, 30% { transform: none; } 45%, 65% { transform: scale(1.35); opacity: 0.05; } 80%, 100% { transform: none; } }
+  .pop { animation: pop 4.2s ease-out infinite backwards; animation-delay: calc(var(--i) * 0.09s); }
+  @keyframes pop { 0% { opacity: 0; transform: translateY(-36px); } 12%, 76% { opacity: 1; transform: none; } 88%, 100% { opacity: 0; transform: none; } }
+  .lift { animation: lift 4.2s cubic-bezier(0.5, 0, 0.3, 1) infinite; }
+  @keyframes lift { 0%, 12% { transform: none; } 38%, 68% { transform: translateY(72px); } 94%, 100% { transform: none; } }
+  .land { animation: land 4.2s cubic-bezier(0.5, 0, 0.3, 1.2) infinite; }
+  @keyframes land { 0%, 12% { transform: none; } 38%, 70% { transform: translateY(96px); } 94%, 100% { transform: none; } }
+}
+.voxels polygon { stroke: var(--vx-edge); stroke-width: 0.6; stroke-linejoin: round; }
+.v.n .ft { fill: url(#mt); } .v.n .fl { fill: url(#ml); } .v.n .fr { fill: url(#mr); }
+.v.t .ft { fill: url(#tt); } .v.t .fl { fill: url(#tl); } .v.t .fr { fill: url(#tr); }
+.v.w polygon, .v.g polygon { fill: none; stroke-width: 1.4; stroke-dasharray: 4 4; }
+.v.w polygon { stroke: var(--accent); }
+.v.g polygon { stroke: var(--muted); }
+.v.d .ft { fill: #6B6964; } .v.d .fl { fill: #2E2D2A; } .v.d .fr { fill: #4A4844; }
+
+/* Sections */
+section.block { padding-block: 112px 0; }
+.center-head { text-align: center; max-width: 760px; margin: 0 auto 56px; }
+.center-head h2 { font: 600 clamp(28px, 3.3vw, 40px)/1.15 var(--font-display); letter-spacing: -0.035em; margin: 16px 0 14px; }
+.center-head p { color: var(--muted); margin: 0 auto; max-width: 34em; font-size: 18px; }
+@media (max-width: 760px) { section.block { padding-block: 80px 0; } .center-head { margin-bottom: 40px; } }
+
+/* Why */
+.why { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.why-item { background: var(--panel-oat); border: 1px solid transparent; border-radius: 20px; padding: 28px 24px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.why-item .mini { width: 26px; height: 26px; margin-bottom: 8px; }
+.why-item h3 { font: 600 18px/1.3 var(--font-display); margin: 0; letter-spacing: -0.02em; }
+.why-item p { margin: 0; color: var(--muted); font-size: 16px; }
+.industries { list-style: none; padding: 0; margin: 32px 0 0; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.industries li { font: 400 13px/1 var(--font-mono); padding: 9px 13px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); background: var(--surface); }
+@media (max-width: 960px) { .why { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 540px) { .why { grid-template-columns: 1fr; } }
+
+/* Feature rows */
+.features { display: flex; flex-direction: column; gap: 24px; }
+.feature { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 64px; align-items: center; padding-block: 24px; }
+.feature.flip .feature-text { order: 2; }
+.feature-text { min-width: 0; max-width: 30em; }
+.feature-text h3 { font: 600 clamp(24px, 2.5vw, 30px)/1.18 var(--font-display); margin: 14px 0 14px; letter-spacing: -0.03em; }
+.feature-text p { margin: 0 0 18px; color: var(--muted); }
+.feature-text ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.feature-text li { display: flex; gap: 12px; font-size: 16px; }
+.feature-text li::before { content: ""; flex: none; width: 6px; height: 6px; margin-top: 10px; background: var(--accent); }
+.panel { min-width: 0; border-radius: 28px; aspect-ratio: 5 / 4; max-width: 100%; display: grid; place-items: center; padding: 40px; }
+.panel .voxels { width: 72%; max-height: 100%; height: auto; }
+.panel.mist { background: var(--panel-mist); } .panel.oat { background: var(--panel-oat); } .panel.sage { background: var(--panel-sage); } .panel.fog { background: var(--panel-fog); }
+@media (max-width: 860px) {
+  .feature, .feature.flip { grid-template-columns: 1fr; gap: 28px; }
+  .feature.flip .feature-text { order: 0; }
+  .panel { border-radius: 20px; padding: 28px; }
+}
+
+/* Process */
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; list-style: none; padding: 0; margin: 0; counter-reset: s; }
+.steps li { counter-increment: s; min-width: 0; padding: 24px; border: 1px solid var(--line); border-radius: 20px; background: var(--surface); }
+.steps li::before { content: "Step " counter(s); display: block; font: 500 12px/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+.steps h3 { font: 600 18px/1.3 var(--font-display); margin: 0 0 8px; letter-spacing: -0.02em; }
+.steps p { margin: 0; color: var(--muted); font-size: 16px; }
+@media (max-width: 960px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 540px) { .steps { grid-template-columns: 1fr; } }
+
+/* Work */
+.work { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; }
+.shot { margin: 0; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+.frame { aspect-ratio: 16 / 10; max-width: 100%; border-radius: 20px; background: var(--panel-fog); display: grid; place-items: center; text-align: center; font: 400 13px/1.5 var(--font-mono); color: var(--muted); padding: 16px; }
+.work .stack { display: grid; gap: 16px; min-width: 0; }
+.shot figcaption { font-size: 15px; color: var(--muted); }
+.shot figcaption b { color: var(--ink); font-weight: 500; }
+.project-note { margin: 28px auto 0; text-align: center; color: var(--muted); }
+@media (max-width: 760px) { .work { grid-template-columns: 1fr; } }
+
+/* About + contact */
+.closing { margin-top: 112px; border-radius: 28px; background: var(--panel-mist); padding: 56px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center; }
+.closing h2 { font: 600 clamp(28px, 3.3vw, 40px)/1.15 var(--font-display); margin: 14px 0 16px; letter-spacing: -0.035em; }
+.closing p { margin: 0 0 14px; color: var(--muted); max-width: 32em; }
+.tools { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 0; padding: 0; list-style: none; }
+.tools li { font: 400 13px/1 var(--font-mono); padding: 8px 11px; border-radius: 8px; background: var(--surface); border: 1px solid transparent; }
+.contact { background: var(--surface); border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.contact .row { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.contact .row span { font: 500 11px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.contact .row a, .contact .row div { font-size: 18px; text-decoration: none; overflow-wrap: anywhere; }
+.contact .row a:hover { text-decoration: underline; }
+@media (max-width: 860px) { .closing { grid-template-columns: 1fr; padding: 32px 24px; border-radius: 20px; margin-top: 80px; } }
+
+footer { padding-block: 40px; }
+footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 14px; color: var(--muted); }
+/* Hover */
+.why-item, .steps li, .panel, .frame, .facts div, .industries li, .tools li, .btn {
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+}
+nav a:not(.btn) { position: relative; }
+nav a:not(.btn)::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 1.5px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
+@media (hover: hover) {
+  nav a:not(.btn):hover::after { transform: scaleX(1); }
+  .why-item:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 16px 36px -20px rgba(29, 90, 158, 0.35); }
+  .steps li:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 16px 36px -20px rgba(29, 90, 158, 0.35); }
+  .panel:hover { transform: scale(1.015); }
+  .frame:hover { transform: translateY(-3px); }
+  .facts div:hover { background: var(--accent-soft); }
+  .industries li:hover, .tools li:hover { border-color: var(--accent); color: var(--accent); }
+  .btn:hover { transform: translateY(-2px); }
+  .contact .row a:hover { color: var(--accent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .why-item:hover, .steps li:hover, .panel:hover, .frame:hover, .btn:hover { transform: none; }
+}
+/* Metal system: one material across cards, panels, controls */
+:root {
+  --metal: linear-gradient(160deg, #FFFFFF 0%, #F1F3F5 45%, #E2E6EA 100%);
+  --metal-soft: linear-gradient(170deg, #FFFFFF 0%, #F4F6F7 60%, #EBEEF1 100%);
+  --metal-panel: radial-gradient(120% 100% at 25% 0%, #FFFFFF 0%, #EDF0F3 42%, #D9DEE3 100%);
+  --metal-hl: rgba(255, 255, 255, 0.95);
+  --metal-ring: rgba(150, 160, 170, 0.28);
+  --metal-drop: 0 1px 2px rgba(20, 30, 40, 0.06), 0 10px 24px -14px rgba(20, 30, 40, 0.18);
+  --btn-a: #30353B; --btn-b: #101215; --btn-ink: #FFFFFF;
+  --graphite: linear-gradient(155deg, #2E3338 0%, #1A1D21 55%, #101215 100%);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --metal: linear-gradient(160deg, #2B2F34 0%, #212428 50%, #1A1C1F 100%);
+    --metal-soft: linear-gradient(170deg, #272A2E 0%, #1E2124 100%);
+    --metal-panel: radial-gradient(120% 100% at 25% 0%, #33383E 0%, #212428 48%, #17191C 100%);
+    --metal-hl: rgba(255, 255, 255, 0.08);
+    --metal-ring: rgba(255, 255, 255, 0.08);
+    --metal-drop: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 24px -14px rgba(0, 0, 0, 0.6);
+    --btn-a: #F4F6F8; --btn-b: #C9CFD5; --btn-ink: #111316;
+    --graphite: linear-gradient(155deg, #2A2E33 0%, #181A1D 60%, #0E0F11 100%);
+  }
+}
+:root[data-theme="dark"] {
+  --metal: linear-gradient(160deg, #2B2F34 0%, #212428 50%, #1A1C1F 100%);
+  --metal-soft: linear-gradient(170deg, #272A2E 0%, #1E2124 100%);
+  --metal-panel: radial-gradient(120% 100% at 25% 0%, #33383E 0%, #212428 48%, #17191C 100%);
+  --metal-hl: rgba(255, 255, 255, 0.08);
+  --metal-ring: rgba(255, 255, 255, 0.08);
+  --metal-drop: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 24px -14px rgba(0, 0, 0, 0.6);
+  --btn-a: #F4F6F8; --btn-b: #C9CFD5; --btn-ink: #111316;
+  --graphite: linear-gradient(155deg, #2A2E33 0%, #181A1D 60%, #0E0F11 100%);
+}
+.why-item, .steps li { background: var(--surface); border: 1px solid var(--line); box-shadow: none; }
+.frame { background: var(--metal-panel); box-shadow: inset 0 1px 0 var(--metal-hl), 0 0 0 1px var(--metal-ring); }
+.panel, .panel.mist, .panel.oat, .panel.sage, .panel.fog { background: var(--metal-panel); box-shadow: inset 0 1px 0 var(--metal-hl), 0 0 0 1px var(--metal-ring); }
+.industries li, .tools li { background: var(--metal-soft); border: 0; box-shadow: inset 0 1px 0 var(--metal-hl), 0 0 0 1px var(--metal-ring); }
+.btn { background: var(--metal-soft); border: 0; box-shadow: inset 0 1px 0 var(--metal-hl), 0 0 0 1px var(--metal-ring), 0 4px 12px -8px rgba(20, 30, 40, 0.3); }
+.btn.primary, nav .btn { background: linear-gradient(180deg, var(--btn-a), var(--btn-b)); color: var(--btn-ink); border: 0; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 6px 18px -8px rgba(10, 15, 20, 0.5); }
+.btn.primary:hover { opacity: 1; }
+.label { color: var(--muted); }
+.closing { position: relative; overflow: hidden; background: var(--metal-panel); box-shadow: inset 0 1px 0 var(--metal-hl), 0 0 0 1px var(--metal-ring); padding-bottom: clamp(140px, 19vw, 260px); }
+.closing > div { position: relative; z-index: 1; }
+.closing .contact { background: var(--metal); box-shadow: inset 0 1px 0 var(--metal-hl), 0 0 0 1px var(--metal-ring), var(--metal-drop); }
+.closing .giant { position: absolute; left: 0; right: 0; bottom: -0.22em; z-index: 0; margin: 0; font: 500 clamp(90px, 19vw, 270px)/1 var(--font-logo); letter-spacing: -0.06em; text-align: center; white-space: nowrap; pointer-events: none; user-select: none; background: linear-gradient(180deg, var(--silver-type-a) 0%, var(--silver-type-b) 85%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+@media (hover: hover) {
+  .why-item:hover, .steps li:hover { border-color: var(--accent); box-shadow: 0 16px 36px -20px rgba(29, 90, 158, 0.35); }
+  .industries li:hover, .tools li:hover { box-shadow: inset 0 1px 0 var(--metal-hl), 0 0 0 1px var(--accent); }
+}
+/* Tech sections: full-bleed silver bands with a fine fading pattern */
+section.tech { position: relative; padding-block: 112px; margin-top: 112px; background: linear-gradient(180deg, var(--bg) 0%, var(--band-silver) 18%, var(--band-silver) 82%, var(--bg) 100%); isolation: isolate; }
+section.tech::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; -webkit-mask-image: radial-gradient(ellipse 85% 55% at 50% 74%, #000 30%, transparent 85%); mask-image: radial-gradient(ellipse 85% 55% at 50% 74%, #000 30%, transparent 85%); }
+section.tech.dots::before { background-image: radial-gradient(circle, var(--pattern) 1.2px, transparent 1.4px); background-size: 22px 22px; background-position: center; }
+section.tech.lines::before { background-image: linear-gradient(var(--pattern) 1px, transparent 1px), linear-gradient(90deg, var(--pattern) 1px, transparent 1px); background-size: 56px 56px; background-position: center; }
+section.tech + section.block { padding-top: 0; margin-top: 112px; }
+@media (max-width: 760px) { section.tech { padding-block: 80px; margin-top: 80px; } }
+:root { --px-t: #FFFFFF; --px-l: #C3CAD0; --px-r: #E3E7EB; --px-tt: #4C8BE0; --px-tl: #2B3035; --px-tr: #9CC3F2; --px-edge: rgba(255,255,255,0.9); --band-silver: #EBEEF1; --pattern: rgba(100, 112, 124, 0.34); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --px-t: #8E969D; --px-l: #3A3F44; --px-r: #5F666C; --px-tt: #6CA2EA; --px-tl: #E2E6E9; --px-tr: #2C5F9E; --px-edge: rgba(0,0,0,0.35); --band-silver: #1B1D20; --pattern: rgba(200, 210, 220, 0.13); } }
+:root[data-theme="dark"] { --px-t: #8E969D; --px-l: #3A3F44; --px-r: #5F666C; --px-tt: #6CA2EA; --px-tl: #E2E6E9; --px-tr: #2C5F9E; --px-edge: rgba(0,0,0,0.35); --band-silver: #1B1D20; --pattern: rgba(200, 210, 220, 0.13); }
+.contact { padding: 32px; gap: 22px; }
+.contact-head { display: flex; gap: 14px; align-items: flex-start; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+.contact-head .mini { width: 30px; height: 30px; flex: none; margin-top: 2px; }
+.contact-head div { display: flex; flex-direction: column; gap: 4px; }
+.contact-head b { font: 600 18px/1.3 var(--font-display); letter-spacing: -0.02em; }
+.contact-head span { font-size: 15px; color: var(--muted); }
+.contact-btn { justify-content: center; margin-top: 4px; }
+#twin { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; display: block; pointer-events: none; }
+#xr-lines { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; overflow: visible; }
+#xr-lines line { stroke: var(--accent); stroke-width: 1; stroke-dasharray: 3 3; }
+#xr-lines circle { fill: var(--surface); stroke: var(--accent); stroke-width: 1.5; }
+.xr { position: absolute; left: 0; top: 0; z-index: 2; pointer-events: none; display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 10px; background: color-mix(in srgb, var(--surface) 72%, transparent); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: inset 0 1px 0 var(--metal-hl), 0 0 0 1px var(--metal-ring), 0 8px 20px -12px rgba(20, 30, 40, 0.3); font-size: 13px; white-space: nowrap; transition: opacity .4s ease; will-change: transform; }
+.xr span { font: 500 11px/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
+.xr b { font-weight: 500; }
+.xr i { width: 16px; height: 16px; border-radius: 50%; background: var(--accent); flex: none; position: relative; }
+.xr i::after { content: ""; position: absolute; left: 5px; top: 3px; width: 4px; height: 7px; border: solid var(--surface); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+@media (max-width: 860px) { .xr { display: none; } }
+/* Split hero: copy on the left, a VR view on the right */
+.hero { text-align: left; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 32px; align-items: center; padding-block: 120px 72px !important; }
+.hero .copy { min-width: 0; }
+.hero h1 { margin-left: 0; max-width: 11em; }
+.hero .lead { margin-left: 0; max-width: 30em; }
+.hero .cta { justify-content: flex-start; }
+.stage { position: relative; min-width: 0; height: clamp(420px, 56vh, 560px); }
+.vr-panel { position: absolute; right: 0; top: 4%; width: min(270px, 70%); padding: 18px; border-radius: 16px; background: color-mix(in srgb, var(--surface) 70%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: inset 0 1px 0 var(--metal-hl), 0 0 0 1px var(--metal-ring), 0 24px 48px -24px rgba(20, 30, 40, 0.35); transform: perspective(900px) rotateY(-14deg) rotateX(4deg); transform-origin: right center; }
+@media (prefers-reduced-motion: no-preference) { .vr-panel { animation: hover-panel 6s ease-in-out infinite; } @keyframes hover-panel { 50% { translate: 0 -8px; } } }
+.vp-head { display: flex; flex-direction: column; gap: 6px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.vp-head span { font: 500 11px/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
+.vp-head b { font: 600 15px/1.2 var(--font-display); letter-spacing: -0.01em; }
+.vr-panel ul { list-style: none; margin: 10px 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.vr-panel li { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; font-size: 13.5px; color: var(--muted); transition: background-color .3s ease, color .3s ease; }
+.vr-panel li i { width: 16px; height: 16px; border-radius: 5px; flex: none; box-shadow: inset 0 0 0 1.5px var(--metal-ring); position: relative; transition: background-color .3s ease; }
+.vr-panel li.active { background: var(--accent-soft); color: var(--ink); }
+.vr-panel li.active i { box-shadow: inset 0 0 0 1.5px var(--accent); }
+.vr-panel li.done { color: var(--ink); }
+.vr-panel li.done i { background: var(--accent); box-shadow: none; }
+.vr-panel li.done i::after { content: ""; position: absolute; left: 5px; top: 2px; width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+.vp-foot { display: flex; justify-content: space-between; align-items: baseline; padding-top: 12px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+.vp-foot b { font: 600 18px/1 var(--font-display); color: var(--ink); font-variant-numeric: tabular-nums; }
+#xr-lines .ray { stroke: url(#ray); stroke-width: 3; stroke-linecap: round; filter: drop-shadow(0 0 4px rgba(111, 176, 255, 0.8)); }
+#xr-lines .hit { fill: #6FB0FF; filter: drop-shadow(0 0 6px rgba(111, 176, 255, 0.9)); }
+#xr-lines .lead { stroke: var(--accent); stroke-width: 1; stroke-dasharray: 3 3; }
+#xr-lines .dot { fill: var(--surface); stroke: var(--accent); stroke-width: 1.5; }
+@media (max-width: 860px) {
+  .hero-grid { grid-template-columns: 1fr; padding-block: 112px 32px !important; text-align: center; }
+  .hero .copy { text-align: center; } .hero h1, .hero .lead { margin-inline: auto; } .hero .cta { justify-content: center; }
+  .stage { height: 380px; }
+  .vr-panel { width: 220px; top: 0; right: 4%; transform: none; padding: 14px; }
+}
+@media (max-width: 860px) { #xr-lines .lead, #xr-lines .dot { display: none; } }
+.hero .hero-facts { position: relative; z-index: 1; padding-block: 0 32px; pointer-events: auto; }
+.hero-facts .facts { background: transparent; border: 0; border-top: 1px solid var(--metal-ring); border-radius: 0; gap: 0; overflow: visible; }
+.hero-facts .facts div { background: transparent; padding: 20px 20px 0 0; }
+.hero-facts .facts div + div { padding-left: 20px; border-left: 1px solid var(--metal-ring); }
+@media (max-width: 760px) { .hero-facts .facts div + div { border-left: 0; padding-left: 0; } .hero-facts .facts { row-gap: 4px; } }
+@media (hover: hover) { .hero-facts .facts div:hover { background: transparent; } }
+.hero { flex-direction: column; }
+.hero-grid { flex: 1; align-content: center; padding-block: 104px 40px !important; }
+/* Silver controls and a silver facts bar in the hero */
+.btn.primary, nav .btn { background: linear-gradient(180deg, #FFFFFF 0%, #E9EDF0 48%, #CFD6DC 100%); color: var(--ink); box-shadow: inset 0 1px 0 #FFFFFF, inset 0 -1px 0 rgba(120, 132, 144, 0.35), 0 0 0 1px rgba(120, 132, 144, 0.45), 0 8px 20px -10px rgba(20, 30, 40, 0.45); }
+.btn.primary::after { content: ""; width: 8px; height: 8px; margin-left: 2px; background: var(--accent); transform: rotate(45deg) scale(0.85); border-radius: 1px; }
+.btn.primary:hover, nav .btn:hover { box-shadow: inset 0 1px 0 #FFFFFF, inset 0 -1px 0 rgba(120, 132, 144, 0.35), 0 0 0 1px var(--accent), 0 10px 24px -10px rgba(29, 90, 158, 0.45); }
+.btn:not(.primary) { background: transparent; box-shadow: 0 0 0 1px var(--metal-ring); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn.primary, :root:not([data-theme="light"]) nav .btn { background: linear-gradient(180deg, #4A5057 0%, #33383D 55%, #25292D 100%); color: #F1F3F5; box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), 0 0 0 1px rgba(255,255,255,0.12), 0 8px 20px -10px rgba(0,0,0,0.6); } }
+:root[data-theme="dark"] .btn.primary, :root[data-theme="dark"] nav .btn { background: linear-gradient(180deg, #4A5057 0%, #33383D 55%, #25292D 100%); color: #F1F3F5; box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), 0 0 0 1px rgba(255,255,255,0.12), 0 8px 20px -10px rgba(0,0,0,0.6); }
+
+.hero .hero-facts .facts { border-top: 0; border-radius: 18px; background: var(--metal-panel); box-shadow: inset 0 1px 0 var(--metal-hl), 0 0 0 1px var(--metal-ring), 0 18px 40px -24px rgba(20, 30, 40, 0.35); overflow: hidden; }
+.hero .hero-facts .facts div { padding: 18px 22px; display: grid; grid-template-columns: auto 1fr; column-gap: 12px; row-gap: 2px; align-items: center; }
+.hero .hero-facts .facts div + div { padding-left: 22px; border-left: 1px solid var(--metal-ring); }
+.hero .hero-facts .facts div::before { content: ""; grid-row: 1 / span 2; width: 22px; height: 22px; background: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 22 22%27%3E%3Cpath d=%27M11 1.5 20 6.5 11 11.5 2 6.5Z%27 fill=%27%234C8BE0%27/%3E%3Cpath d=%27M2 6.5 11 11.5 11 21 2 16Z%27 fill=%27%232B3035%27/%3E%3Cpath d=%27M20 6.5 11 11.5 11 21 20 16Z%27 fill=%27%239CC3F2%27/%3E%3C/svg%3E") no-repeat center / contain; }
+.hero .hero-facts .facts b, .hero .hero-facts .facts span { grid-column: 2; }
+@media (max-width: 760px) { .hero .hero-facts .facts div, .hero .hero-facts .facts div + div { padding: 14px 16px; border-left: 0; } .hero .hero-facts .facts div:nth-child(even) { border-left: 1px solid var(--metal-ring); } .hero .hero-facts .facts div:nth-child(n+3) { border-top: 1px solid var(--metal-ring); } }
+
+.hero .lead { max-width: 33em; text-wrap: balance; }
+/* Flat teal primary buttons and a flat facts bar */
+.btn.primary, nav .btn, :root .btn.primary, :root nav .btn { background: var(--accent); color: #FFFFFF; box-shadow: none; }
+.btn.primary::after { display: none; }
+.btn.primary:hover, nav .btn:hover { background: var(--accent-hover); box-shadow: none; transform: translateY(-1px); }
+.hero .hero-facts .facts { background: color-mix(in srgb, var(--surface) 70%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); box-shadow: 0 0 0 1px var(--line); }
+:root { --accent-hover: #17497F; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --accent-hover: #5A93DC; } :root:not([data-theme="light"]) .btn.primary, :root:not([data-theme="light"]) nav .btn { background: var(--accent); color: #0D1420; box-shadow: none; } }
+:root[data-theme="dark"] { --accent-hover: #5A93DC; }
+:root[data-theme="dark"] .btn.primary, :root[data-theme="dark"] nav .btn { background: var(--accent); color: #0D1420; box-shadow: none; }
+.hero .hero-facts .facts div, .hero .hero-facts .facts div + div { padding-inline: 18px; }
+.hero .hero-facts .facts b, .hero .hero-facts .facts span { white-space: nowrap; min-width: 0; }
+.hero .hero-facts .facts span { font-size: 13.5px; }
+@media (max-width: 1080px) { .hero .hero-facts .facts b, .hero .hero-facts .facts span { white-space: normal; } }
+.btn:not(.primary) { background: var(--surface); box-shadow: 0 0 0 1px var(--line); }
+/* Facts bar: roomier, with hover and a gentle entrance */
+.hero .hero-facts .facts div, .hero .hero-facts .facts div + div { padding-block: 22px; padding-inline: 24px; transition: background-color .3s ease; }
+.hero .hero-facts .facts div::before { transition: transform .45s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.hero .hero-facts .facts b { transition: color .25s ease; }
+@media (hover: hover) {
+  .hero .hero-facts .facts div:hover { background: var(--accent-soft); }
+  .hero .hero-facts .facts div:hover::before { transform: translateY(-3px) rotate(-8deg) scale(1.12); }
+  .hero .hero-facts .facts div:hover b { color: var(--accent); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero .hero-facts .facts div { animation: fact-in .7s cubic-bezier(0.2, 0.8, 0.2, 1) backwards; }
+  .hero .hero-facts .facts div:nth-child(1) { animation-delay: .25s; } .hero .hero-facts .facts div:nth-child(2) { animation-delay: .35s; }
+  .hero .hero-facts .facts div:nth-child(3) { animation-delay: .45s; } .hero .hero-facts .facts div:nth-child(4) { animation-delay: .55s; }
+  @keyframes fact-in { from { opacity: 0; transform: translateY(10px); } }
+}
+/* Contact card: the cube hops and rolls when the card is hovered */
+.contact-head .mini { transform-origin: 50% 60%; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  @keyframes cube-roll {
+    0% { transform: none; }
+    35% { transform: translateY(-9px) rotate(60deg) scale(1.08); }
+    70% { transform: translateY(0) rotate(120deg) scale(1.12, 0.9); }
+    85% { transform: translateY(-2px) rotate(120deg) scale(0.97, 1.03); }
+    100% { transform: rotate(120deg); }
+  }
+  .contact:hover .contact-head b { color: var(--accent); }
+}
+.contact-head b { transition: color .25s ease; }
+/* Work: bento gallery of real project captures */
+.bento { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.tile { position: relative; margin: 0; min-width: 0; border-radius: 18px; overflow: hidden; background: var(--panel-fog); aspect-ratio: 16 / 10; box-shadow: 0 0 0 1px var(--line); }
+.tile img, .tile video { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.tile-hero { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
+.tile figcaption { position: absolute; left: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 8px; padding: 7px 11px; border-radius: 9px; font-size: 13px; font-weight: 500; color: #15171A; background: rgba(255, 255, 255, 0.82); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.tile .live { font: 500 10px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: #FFFFFF; background: #1D5A9E; padding: 4px 6px; border-radius: 5px; }
+@media (hover: hover) { .tile:hover img, .tile:hover video { transform: scale(1.04); } }
+@media (max-width: 860px) { .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); } .tile-hero { grid-column: span 2; grid-row: auto; aspect-ratio: 16 / 10; } }
+@media (max-width: 540px) { .bento { grid-template-columns: 1fr; } .tile-hero { grid-column: auto; } }
+.tile-wide { grid-column: span 2; aspect-ratio: auto; }
+.tile-wide img { position: absolute; inset: 0; }
+@media (max-width: 860px) { .tile-wide { aspect-ratio: 2 / 1; } }
+@media (max-width: 540px) { .tile-wide { grid-column: auto; aspect-ratio: 16 / 10; } }
+.center-head p { text-wrap: balance; }
+/* Work grid on six columns: big video 4x2, two tiles on the right, two half-width tiles below */
+.bento { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.bento .tile { grid-column: span 2; }
+.bento .tile-hero { grid-column: span 4; grid-row: span 2; }
+.bento .tile-half { grid-column: span 3; aspect-ratio: 16 / 10; }
+@media (max-width: 860px) { .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); } .bento .tile, .bento .tile-half { grid-column: span 1; } .bento .tile-hero { grid-column: span 2; grid-row: auto; } }
+@media (max-width: 540px) { .bento { grid-template-columns: 1fr; } .bento .tile, .bento .tile-half, .bento .tile-hero { grid-column: auto; } }
+#work .center-head { max-width: 900px; }
+#work .work-intro { max-width: 46em; }
+/* Contact: a full-width silver band instead of a boxed panel */
+.contact-band { position: relative; overflow: hidden; margin-top: 112px; background: var(--metal-panel); border-top: 1px solid var(--metal-ring); padding-block: 112px clamp(170px, 21vw, 300px); isolation: isolate; }
+.contact-band .closing { margin: 0; padding: 0; border-radius: 0; background: none; box-shadow: none; overflow: visible; position: relative; z-index: 1; }
+.contact-band .giant { position: absolute; left: 0; right: 0; bottom: -0.2em; z-index: 0; margin: 0; font: 500 clamp(56px, 22vw, 380px)/1 var(--font-logo); letter-spacing: -0.06em; text-align: center; white-space: nowrap; pointer-events: none; user-select: none; background: linear-gradient(180deg, var(--silver-type-a) 0%, var(--silver-type-b) 85%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.contact-band + footer, main + footer { border-top: 0; }
+@media (max-width: 860px) { .contact-band { margin-top: 80px; padding-block: 72px clamp(110px, 26vw, 170px); } .contact-band .closing { padding: 0; } }
+/* Contact band fades in from the page instead of starting at a hard line */
+.contact-band { margin-top: 40px; border-top: 0; padding-top: 184px; background: linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 40%, transparent) 14%, transparent 32%), var(--metal-panel); }
+@media (max-width: 860px) { .contact-band { margin-top: 24px; padding-top: 120px; } }
+/* Soft veil behind the hero copy so the floor grid never competes with the text */
+.hero .copy { position: relative; isolation: isolate; }
+.hero .copy::before { content: ""; position: absolute; inset: -36px -24px -36px -64px; z-index: -1; pointer-events: none; background: radial-gradient(closest-side, color-mix(in srgb, var(--hero-top) 82%, transparent) 60%, transparent 100%); }
+.hero .lead { color: color-mix(in srgb, var(--ink) 72%, var(--muted)); }
+@media (max-width: 860px) { .hero .copy::before { inset: -40px -24px; } }
+/* Process fills exactly one screen below the header, so jumping to it shows nothing else */
+section#process { min-height: calc(100vh - 76px); min-height: calc(100svh - 76px); display: flex; flex-direction: column; justify-content: center; scroll-margin-top: 76px; }
+section#process > .wrap { width: 100%; }
+/* Wordmark: the client's own split-color letterforms, recolored to the site palette */
+:root { --lg-a: #2463AE; --lg-b: #8DB8EE; --lg-d: #2A2F34; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --lg-a: #6CA2EA; --lg-b: #2C5F9E; --lg-d: #E8E6DF; } }
+:root[data-theme="dark"] { --lg-a: #6CA2EA; --lg-b: #2C5F9E; --lg-d: #E8E6DF; }
+.brand { display: inline-flex; align-items: center; }
+.wordmark-svg { height: 40px; width: auto; display: block; overflow: visible; margin-block: -4px; }
+@media (max-width: 540px) { .wordmark-svg { height: 36px; margin-block: -4px; } }
+#xr2 { opacity: 0; }
+/* Phone: tighter hero type, smaller 3D stage and panel, compact facts list */
+@media (max-width: 540px) {
+  .wordmark-svg { height: 32px; }
+  nav .btn { padding: 9px 14px; font-size: 14px; }
+  .hero-grid { padding-block: 96px 16px !important; gap: 20px; }
+  .hero .label { font-size: 10.5px; letter-spacing: .06em; }
+  .hero h1 { font-size: 31px; line-height: 1.1; margin: 14px auto 14px; }
+  .hero .lead { font-size: 15.5px; line-height: 1.55; margin-bottom: 22px; }
+  .hero .cta { gap: 10px; flex-wrap: nowrap; }
+  .hero .cta .btn { padding: 11px 16px; font-size: 14px; white-space: nowrap; }
+  .stage { height: 250px; }
+  .vr-panel { width: 176px; padding: 12px; border-radius: 12px; right: 2%; }
+  .vp-head { gap: 4px; padding-bottom: 8px; }
+  .vp-head span { font-size: 9.5px; } .vp-head b { font-size: 12.5px; }
+  .vr-panel ul { margin: 6px 0; gap: 2px; }
+  .vr-panel li { font-size: 11.5px; padding: 5px 6px; gap: 7px; }
+  .vr-panel li i { width: 12px; height: 12px; border-radius: 4px; }
+  .vr-panel li.done i::after { left: 3.5px; top: 1px; width: 3px; height: 6px; }
+  .vp-foot { padding-top: 8px; font-size: 11px; } .vp-foot b { font-size: 14px; }
+  .hero .hero-facts { padding-block: 0 24px; }
+  .hero .hero-facts .facts { grid-template-columns: 1fr; border-radius: 14px; }
+  .hero .hero-facts .facts div, .hero .hero-facts .facts div + div { padding: 11px 14px; border-left: 0; border-top: 0; display: grid; grid-template-columns: 18px auto 1fr; column-gap: 10px; align-items: center; }
+  .hero .hero-facts .facts div + div { border-top: 1px solid var(--metal-ring); }
+  .hero .hero-facts .facts div:nth-child(even) { border-left: 0; }
+  .hero .hero-facts .facts div::before { grid-row: auto; width: 18px; height: 18px; }
+  .hero .hero-facts .facts b { grid-column: 2; font-size: 14px; white-space: nowrap; }
+  .hero .hero-facts .facts span { grid-column: 3; font-size: 12.5px; text-align: right; white-space: nowrap; }
+}
+.vr-panel { text-align: left; }
+@media (max-width: 540px) { .vr-panel li { white-space: nowrap; } section.tech { margin-top: 16px; padding-block: 64px; } }
+/* Phone menu: a compact toggle that opens a dropdown with every section */
+.menu-toggle { display: none; }
+@media (max-width: 720px) {
+  header .wrap { position: relative; }
+  .menu-toggle { display: inline-flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 44px; height: 44px; border: 0; border-radius: 12px; background: var(--surface); box-shadow: 0 0 0 1px var(--line); cursor: pointer; padding: 0; }
+  .menu-toggle span { display: block; width: 18px; height: 2px; border-radius: 2px; background: var(--ink); transition: transform .3s ease, opacity .2s ease; }
+  header.open .menu-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  header.open .menu-toggle span:nth-child(2) { opacity: 0; }
+  header.open .menu-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  #site-nav { position: absolute; top: calc(100% + 8px); right: max(16px, env(safe-area-inset-right, 0px)); width: min(240px, calc(100vw - 32px)); flex-direction: column; align-items: stretch; gap: 2px; padding: 8px; border-radius: 16px; background: var(--surface); box-shadow: 0 0 0 1px var(--line), 0 18px 40px -16px rgba(20, 30, 40, 0.35); opacity: 0; visibility: hidden; transform: translateY(-6px) scale(0.98); transform-origin: top right; transition: opacity .2s ease, transform .25s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s linear .25s; }
+  header.open #site-nav { opacity: 1; visibility: visible; transform: none; transition: opacity .2s ease, transform .25s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s; }
+  #site-nav a:not(.btn) { display: block; padding: 12px 14px; border-radius: 10px; font-size: 16px; color: var(--ink); }
+  #site-nav a:not(.btn)::after { display: none; }
+  #site-nav a:not(.btn):hover, #site-nav a:not(.btn):focus-visible { background: var(--accent-soft); }
+  #site-nav .btn { justify-content: center; margin-top: 6px; padding: 12px 14px; font-size: 15px; }
+}
+@media (max-width: 720px) and (prefers-reduced-motion: reduce) { #site-nav, .menu-toggle span { transition: none; } }
+/* Phone type scale: H1 32, H2 24, H3 20/17, body 16, small 12+ */
+@media (max-width: 720px) {
+  #site-nav .btn, #site-nav .btn.primary { background: transparent; color: var(--ink); box-shadow: none; justify-content: flex-start; margin-top: 0; padding: 12px 14px; font-size: 16px; font-weight: 400; border-radius: 10px; }
+  #site-nav .btn:hover, #site-nav .btn:focus-visible { background: var(--accent-soft); transform: none; }
+}
+@media (max-width: 540px) {
+  .hero h1 { font-size: 32px; }
+  .hero .lead { font-size: 16px; }
+  .label { font-size: 11px; }
+  .center-head h2, .closing h2 { font-size: 24px; line-height: 1.2; }
+  .center-head p { font-size: 16px; line-height: 1.6; }
+  .feature-text h3 { font-size: 20px; }
+  .why-item h3, .steps h3, .contact-head b { font-size: 17px; }
+  .why-item p, .steps p, .feature-text p, .feature-text li, .closing p { font-size: 15.5px; line-height: 1.6; }
+  footer { font-size: 14px; }
+}
+@media (max-width: 540px) {
+  .features { gap: 8px; }
+  .feature, .feature.flip { gap: 18px; padding-block: 16px; }
+  .panel { aspect-ratio: 16 / 9; padding: 16px; border-radius: 18px; }
+  .panel .voxels { width: auto; max-width: 62%; height: 100%; }
+}
+/* Why: photo beside a 2x2 card grid */
+.why-wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 16px; align-items: stretch; }
+.why-wrap .why { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.why-photo { margin: 0; min-width: 0; border-radius: 20px; overflow: hidden; background: var(--panel-fog); box-shadow: 0 0 0 1px var(--line); }
+.why-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 54% 30%; display: block; }
+@media (max-width: 960px) { .why-wrap { grid-template-columns: 1fr; } .why-photo { aspect-ratio: 16 / 9; } }
+@media (max-width: 540px) { .why-wrap .why { grid-template-columns: 1fr; } .why-photo { aspect-ratio: 4 / 3; border-radius: 16px; } }
+/* Let the photo dissolve into the section instead of sitting in a box */
+.why-wrap { gap: 0; }
+.why-photo { border-radius: 0; box-shadow: none; background: none; margin-right: -64px; position: relative; z-index: 0;
+  -webkit-mask-image: radial-gradient(ellipse 72% 78% at 42% 46%, #000 52%, transparent 100%);
+  mask-image: radial-gradient(ellipse 72% 78% at 42% 46%, #000 52%, transparent 100%); }
+.why-photo img { object-position: 54% 28%; }
+.why-wrap .why { position: relative; z-index: 1; align-content: center; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .why-photo img { filter: brightness(0.82) contrast(1.05); } }
+:root[data-theme="dark"] .why-photo img { filter: brightness(0.82) contrast(1.05); }
+@media (max-width: 960px) {
+  .why-photo { margin-right: 0; margin-bottom: -40px; aspect-ratio: 16 / 10;
+    -webkit-mask-image: radial-gradient(ellipse 70% 72% at 50% 44%, #000 50%, transparent 100%);
+    mask-image: radial-gradient(ellipse 70% 72% at 50% 44%, #000 50%, transparent 100%); }
+}
+.why-photo {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 18%, #000 62%, transparent 100%), linear-gradient(to bottom, transparent 0%, #000 14%, #000 74%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent 0%, #000 18%, #000 62%, transparent 100%), linear-gradient(to bottom, transparent 0%, #000 14%, #000 74%, transparent 100%);
+  mask-composite: intersect; }
+@media (max-width: 960px) {
+  .why-photo {
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%), linear-gradient(to bottom, transparent 0%, #000 14%, #000 66%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%), linear-gradient(to bottom, transparent 0%, #000 14%, #000 66%, transparent 100%); }
+}
+footer .credit { flex-basis: 100%; font-size: 12px; } footer .credit a { color: inherit; text-decoration: underline; text-underline-offset: 2px; } footer .credit a:hover { color: var(--accent); }
+
+/* lab photo, faded into the contact band: right side only, original proportions */
+.contact-band::before { content: ""; position: absolute; z-index: -1; pointer-events: none; right: 0; top: 50%; width: min(64%, 1080px); aspect-ratio: 1280 / 853; transform: translateY(-58%); background: url("assets/lab-bg.webp") center / 100% 100% no-repeat; opacity: 0.5; filter: saturate(0.9); -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.5) 22%, #000 48%), linear-gradient(180deg, transparent 0%, #000 22%, #000 72%, transparent 100%); -webkit-mask-composite: source-in; mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.5) 22%, #000 48%), linear-gradient(180deg, transparent 0%, #000 22%, #000 72%, transparent 100%); mask-composite: intersect; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .contact-band::before { opacity: 0.22; filter: saturate(0.7) brightness(0.8); } }
+:root[data-theme="dark"] .contact-band::before { opacity: 0.22; filter: saturate(0.7) brightness(0.8); }
+@media (max-width: 860px) { .contact-band::before { width: 100%; top: auto; bottom: 12%; transform: none; opacity: 0.3; -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 70%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 70%, transparent 100%); } }
+
+.contact-band .closing p { color: color-mix(in srgb, var(--ink) 72%, var(--muted)); }
+
+
+/* services: what teams practice */
+.industries.uses { margin-top: 22px; }
+.uses li { cursor: default; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="mt" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color: var(--m-top-a)"/><stop offset="1" style="stop-color: var(--m-top-b)"/></linearGradient>
+    <linearGradient id="ml" x1="0" y1="0" x2="0.4" y2="1"><stop offset="0" style="stop-color: var(--m-left-a)"/><stop offset="1" style="stop-color: var(--m-left-b)"/></linearGradient>
+    <linearGradient id="mr" x1="1" y1="0" x2="0.4" y2="1"><stop offset="0" style="stop-color: var(--m-right-a)"/><stop offset="1" style="stop-color: var(--m-right-b)"/></linearGradient>
+    <linearGradient id="tt" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color: var(--t-top-a)"/><stop offset="1" style="stop-color: var(--t-top-b)"/></linearGradient>
+    <linearGradient id="tl" x1="0" y1="0" x2="0.4" y2="1"><stop offset="0" style="stop-color: var(--t-left-a)"/><stop offset="1" style="stop-color: var(--t-left-b)"/></linearGradient>
+    <linearGradient id="tr" x1="1" y1="0" x2="0.4" y2="1"><stop offset="0" style="stop-color: var(--t-right-a)"/><stop offset="1" style="stop-color: var(--t-right-b)"/></linearGradient>
+  </defs>
+</svg>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Pixelance home">
+      <svg class="wordmark-svg" xmlns="http://www.w3.org/2000/svg" viewBox="-6 -90 1246.9756073373903 330" aria-hidden="true" focusable="false"><defs><clipPath id="c1"><path d="M0,70a70,70 0 1,0 140,0a70,70 0 1,0 -140,0ZM38,70a32,32 0 1,1 64,0a32,32 0 1,1 -64,0Z" clip-rule="evenodd"/></clipPath><clipPath id="c2"><path d="M0,70a70,70 0 1,0 140,0a70,70 0 1,0 -140,0ZM38,70a32,32 0 1,1 64,0a32,32 0 1,1 -64,0Z" clip-rule="evenodd"/></clipPath><clipPath id="c3"><path d="M226,8a70,70 0 1,0 140,0a70,70 0 1,0 -140,0ZM264,8a32,32 0 1,1 64,0a32,32 0 1,1 -64,0Z" clip-rule="evenodd"/></clipPath><clipPath id="c4"><path d="M226,132a70,70 0 1,0 140,0a70,70 0 1,0 -140,0ZM264,132a32,32 0 1,1 64,0a32,32 0 1,1 -64,0Z" clip-rule="evenodd"/></clipPath><clipPath id="c5"><path d="M226,8a70,70 0 1,0 140,0a70,70 0 1,0 -140,0ZM264,8a32,32 0 1,1 64,0a32,32 0 1,1 -64,0Z" clip-rule="evenodd"/></clipPath><clipPath id="c6"><path d="M226,132a70,70 0 1,0 140,0a70,70 0 1,0 -140,0ZM264,132a32,32 0 1,1 64,0a32,32 0 1,1 -64,0Z" clip-rule="evenodd"/></clipPath><mask id="m7" maskUnits="userSpaceOnUse" x="-500" y="-500" width="3000" height="1000"><rect x="-500" y="-500" width="3000" height="1000" fill="#fff"/><path d="M460.0,70.0L657.5,38.7L659.3,53.4L660.0,68.3L659.6,83.1L658.1,97.8L655.4,112.4L651.8,126.8L647.0,140.9L641.3,154.5L634.5,167.7L626.8,180.4L618.1,192.4L608.6,203.8Z" fill="#000"/></mask><clipPath id="c8"><path d="M390,70a70,70 0 1,0 140,0a70,70 0 1,0 -140,0ZM428,70a32,32 0 1,1 64,0a32,32 0 1,1 -64,0Z" clip-rule="evenodd"/></clipPath><clipPath id="c9"><path d="M428,70a32,32 0 1,0 64,0a32,32 0 1,0 -64,0Z" clip-rule="evenodd"/></clipPath><clipPath id="c10"><path d="M766.9756073373903,70a70,70 0 1,0 140,0a70,70 0 1,0 -140,0ZM804.9756073373903,70a32,32 0 1,1 64,0a32,32 0 1,1 -64,0Z" clip-rule="evenodd"/></clipPath><mask id="m11" maskUnits="userSpaceOnUse" x="-500" y="-500" width="3000" height="1000"><rect x="-500" y="-500" width="3000" height="1000" fill="#fff"/><path d="M1001.0,70.0L1158.6,-53.1L1171.2,-35.0L1181.7,-15.6L1190.1,4.9L1196.1,26.1L1199.8,47.9L1201.0,70.0L1199.8,92.1L1196.1,113.9L1190.1,135.1L1181.7,155.6L1171.2,175.0L1158.6,193.1Z" fill="#000"/></mask><mask id="m12" maskUnits="userSpaceOnUse" x="-500" y="-500" width="3000" height="1000"><rect x="-500" y="-500" width="3000" height="1000" fill="#fff"/><path d="M1165.0,70.0L1362.5,38.7L1364.3,53.4L1365.0,68.3L1364.5,83.1L1363.0,97.8L1360.4,112.4L1356.7,126.8L1352.0,140.9L1346.2,154.5L1339.5,167.7L1331.8,180.4L1323.1,192.4L1313.6,203.8Z" fill="#000"/></mask><clipPath id="c13"><path d="M1094.9756073373903,70a70,70 0 1,0 140,0a70,70 0 1,0 -140,0ZM1132.9756073373903,70a32,32 0 1,1 64,0a32,32 0 1,1 -64,0Z" clip-rule="evenodd"/></clipPath><clipPath id="c14"><path d="M1132.9756073373903,70a32,32 0 1,0 64,0a32,32 0 1,0 -64,0Z" clip-rule="evenodd"/></clipPath></defs><rect x="0" y="0" width="38" height="230" fill="var(--lg-a)"/><g clip-path="url(#c1)"><rect x="-10" y="-10" width="80" height="160" fill="var(--lg-b)"/></g><g clip-path="url(#c2)"><rect x="70" y="-10" width="80" height="160" fill="var(--lg-d)"/></g><rect x="164" y="-82" width="38" height="38" fill="var(--lg-d)"/><rect x="164" y="0" width="38" height="140" fill="var(--lg-a)"/><g clip-path="url(#c3)"><rect x="221" y="8" width="150" height="80" fill="var(--lg-a)"/></g><g clip-path="url(#c4)"><rect x="221" y="52" width="150" height="80" fill="var(--lg-d)"/></g><g clip-path="url(#c6)"><g clip-path="url(#c5)"><rect x="221" y="8" width="150" height="80" fill="var(--lg-b)"/></g></g><rect x="226" y="0" width="38" height="10" fill="var(--lg-a)"/><rect x="328" y="0" width="38" height="10" fill="var(--lg-a)"/><rect x="226" y="130" width="38" height="10" fill="var(--lg-d)"/><rect x="328" y="130" width="38" height="10" fill="var(--lg-d)"/><g mask="url(#m7)"><path d="M390,70a70,70 0 1,0 140,0a70,70 0 1,0 -140,0ZM428,70a32,32 0 1,1 64,0a32,32 0 1,1 -64,0Z" fill-rule="evenodd" fill="var(--lg-d)"/></g><g clip-path="url(#c8)"><rect x="360" y="55" width="200" height="30" transform="rotate(-22 460 70)" fill="var(--lg-b)"/></g><g clip-path="url(#c9)"><rect x="360" y="55" width="200" height="30" transform="rotate(-22 460 70)" fill="var(--lg-a)"/></g><rect x="554" y="-82" width="38" height="222" fill="var(--lg-a)"/><path d="M679.5,-1.0L741.0,34.5L679.5,70.0L618.0,34.5Z" fill="var(--lg-a)"/><path d="M618.0,34.5L679.5,70.0L679.5,141.0L618.0,105.5Z" fill="var(--lg-d)"/><path d="M741.0,34.5L679.5,70.0L679.5,141.0L741.0,105.5Z" fill="var(--lg-b)"/><g clip-path="url(#c10)"><rect x="761.9756073373903" y="-5" width="150" height="75" fill="var(--lg-a)"/></g><rect x="868.9756073373903" y="70" width="38" height="70" fill="var(--lg-a)"/><rect x="766.9756073373903" y="0" width="38" height="140" fill="var(--lg-b)"/><g mask="url(#m11)"><path d="M930.9756073373903,70a70,70 0 1,0 140,0a70,70 0 1,0 -140,0ZM968.9756073373903,70a32,32 0 1,1 64,0a32,32 0 1,1 -64,0Z" fill-rule="evenodd" fill="var(--lg-a)"/></g><g mask="url(#m12)"><path d="M1094.9756073373903,70a70,70 0 1,0 140,0a70,70 0 1,0 -140,0ZM1132.9756073373903,70a32,32 0 1,1 64,0a32,32 0 1,1 -64,0Z" fill-rule="evenodd" fill="var(--lg-d)"/></g><g clip-path="url(#c13)"><rect x="1064.9756073373903" y="55" width="200" height="30" transform="rotate(-22 1164.9756073373903 70)" fill="var(--lg-b)"/></g><g clip-path="url(#c14)"><rect x="1064.9756073373903" y="55" width="200" height="30" transform="rotate(-22 1164.9756073373903 70)" fill="var(--lg-a)"/></g></svg>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <nav aria-label="Main" id="site-nav">
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#work">Work</a>
+      <a class="btn primary" href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+<script>
+(function () {
+  var hd = document.querySelector('header'), btn = hd && hd.querySelector('.menu-toggle'), nav = document.getElementById('site-nav');
+  if (!btn || !nav) return;
+  function set(open) { hd.classList.toggle('open', open); btn.setAttribute('aria-expanded', open ? 'true' : 'false'); btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); }
+  btn.addEventListener('click', function () { set(!hd.classList.contains('open')); });
+  nav.addEventListener('click', function (e) { if (e.target.closest('a')) set(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && hd.classList.contains('open')) { set(false); btn.focus(); } });
+  document.addEventListener('click', function (e) { if (hd.classList.contains('open') && !hd.contains(e.target)) set(false); });
+  window.matchMedia('(min-width: 721px)').addEventListener('change', function () { set(false); });
+})();
+</script>
+
+
+<main id="top">
+  <section class="hero">
+    <canvas id="field" aria-hidden="true"></canvas>
+    <canvas id="twin" aria-hidden="true"></canvas>
+    <svg id="xr-lines" aria-hidden="true"></svg>
+    <div class="xr" id="xr2" aria-hidden="true"><i></i><b>Reading in range</b></div>
+    <div class="wrap hero-grid">
+      <div class="copy">
+        <div class="label">Virtual reality training studio</div>
+        <h1>Turning pixels into <em>practice</em></h1>
+        <p class="lead">We build virtual reality experiences that make training safer and more effective. Your team works on equipment that looks and behaves like the real thing, so the first time they do a task on the job is not the first time they have done it.</p>
+        <div class="cta">
+          <a class="btn primary" href="#contact">Start a project</a>
+          <a class="btn" href="#services">Explore our services</a>
+        </div>
+      </div>
+      <div class="stage" aria-hidden="true">
+        <div class="vr-panel">
+          <div class="vp-head"><span>Step 2 / 4</span><b>Lab safety check</b></div>
+          <ul>
+            <li><i></i>Put on gloves</li>
+            <li><i></i>Verify sample label</li>
+            <li><i></i>Check the reading</li>
+            <li><i></i>Submit</li>
+          </ul>
+          <div class="vp-foot"><span>Score</span><b>92%</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="wrap hero-facts">
+      <div class="facts">
+        <div><b>Meta Quest 3</b><span>Standalone, no PC needed</span></div>
+        <div><b>Unreal Engine 5</b><span>Built with Blueprint</span></div>
+        <div><b>Your CAD models</b><span>Converted for real-time</span></div>
+        <div><b>Full handoff</b><span>App and project files</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block tech dots" id="why">
+    <div class="wrap">
+      <div class="center-head">
+        <div class="label">Why VR training</div>
+        <h2>People rarely forget how to do a task. They <em>skip</em> a step when they are busy.</h2>
+        <p>In VR, people can repeat the same check as often as they need to, on equipment that looks like their own, until doing it right feels automatic.</p>
+      </div>
+      <div class="why-wrap">
+        <figure class="why-photo"><img src="assets/vr-doctor.webp" alt="A doctor in a white coat and blue gloves wearing a VR headset" width="1400" height="910" loading="lazy"></figure>
+        <div class="why">
+        <div class="why-item"><svg class="mini" viewBox="0 0 22 22" aria-hidden="true"><path fill="url(#tt)" d="M11 1.5 20 6.5 11 11.5 2 6.5Z"/><path fill="url(#tl)" d="M2 6.5 11 11.5 11 21 2 16Z"/><path fill="url(#tr)" d="M20 6.5 11 11.5 11 21 20 16Z"/></svg><h3>Practice without risk</h3><p>Mistakes happen inside the headset. The real line keeps running and nobody gets hurt while people learn.</p></div>
+        <div class="why-item"><svg class="mini" viewBox="0 0 22 22" aria-hidden="true"><path fill="url(#tt)" d="M11 1.5 20 6.5 11 11.5 2 6.5Z"/><path fill="url(#tl)" d="M2 6.5 11 11.5 11 21 2 16Z"/><path fill="url(#tr)" d="M20 6.5 11 11.5 11 21 20 16Z"/></svg><h3>Build the right habits</h3><p>Some scenarios hide a problem on purpose. Learners have to look closely to find it instead of assuming everything is fine.</p></div>
+        <div class="why-item"><svg class="mini" viewBox="0 0 22 22" aria-hidden="true"><path fill="url(#tt)" d="M11 1.5 20 6.5 11 11.5 2 6.5Z"/><path fill="url(#tl)" d="M2 6.5 11 11.5 11 21 2 16Z"/><path fill="url(#tr)" d="M20 6.5 11 11.5 11 21 20 16Z"/></svg><h3>Track every result</h3><p>Each session records what a learner got right and what they missed. Trainers can export the results and see who needs more practice.</p></div>
+        <div class="why-item"><svg class="mini" viewBox="0 0 22 22" aria-hidden="true"><path fill="url(#tt)" d="M11 1.5 20 6.5 11 11.5 2 6.5Z"/><path fill="url(#tl)" d="M2 6.5 11 11.5 11 21 2 16Z"/><path fill="url(#tr)" d="M20 6.5 11 11.5 11 21 20 16Z"/></svg><h3>One standard for all</h3><p>Whether someone started last week or ten years ago, they practice the same scenario and are scored the same way.</p></div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="services">
+    <div class="wrap">
+      <div class="center-head">
+        <div class="label">Services</div>
+        <h2>From your CAD files to a training app <em>on the headset</em></h2>
+        <ul class="industries uses" aria-label="Things teams can practice">
+          <li>Lab safety checks</li><li>Equipment verification</li><li>SOP practice</li><li>New hire onboarding</li>
+        </ul>
+      </div>
+      <div class="features">
+        <div class="feature">
+          <div class="feature-text">
+            <div class="label">01 · CAD conversion</div>
+            <h3>CAD conversion and equipment integration</h3>
+            <p>We turn your CAD files into lightweight models that run smoothly in VR. Handles still turn and gauge needles still move, because those are the parts people need to check.</p>
+            <ul><li>Conversion and cleanup of your CAD files</li><li>Moving parts kept working for training</li></ul>
+          </div>
+          <div class="panel mist"><svg class="voxels" viewBox="-79 -90 276 248" role="img" aria-label="Wireframe cubes becoming solid cubes"><g class="v w "><polygon class="ft" points="0.0,-40.0 34.6,-20.0 0.0,0.0 -34.6,-20.0"/><polygon class="fl" points="-34.6,20.0 0.0,40.0 0.0,0.0 -34.6,-20.0"/><polygon class="fr" points="34.6,20.0 0.0,40.0 0.0,0.0 34.6,-20.0"/></g><g class="v w "><polygon class="ft" points="-34.6,-20.0 0.0,0.0 -34.6,20.0 -69.3,0.0"/><polygon class="fl" points="-69.3,40.0 -34.6,60.0 -34.6,20.0 -69.3,0.0"/><polygon class="fr" points="0.0,40.0 -34.6,60.0 -34.6,20.0 0.0,0.0"/></g><g class="v w "><polygon class="ft" points="34.6,-20.0 69.3,0.0 34.6,20.0 0.0,0.0"/><polygon class="fl" points="0.0,40.0 34.6,60.0 34.6,20.0 0.0,0.0"/><polygon class="fr" points="69.3,40.0 34.6,60.0 34.6,20.0 69.3,0.0"/></g><g class="v w "><polygon class="ft" points="0.0,-80.0 34.6,-60.0 0.0,-40.0 -34.6,-60.0"/><polygon class="fl" points="-34.6,-20.0 0.0,0.0 0.0,-40.0 -34.6,-60.0"/><polygon class="fr" points="34.6,-20.0 0.0,0.0 0.0,-40.0 34.6,-60.0"/></g><g class="v w "><polygon class="ft" points="0.0,0.0 34.6,20.0 0.0,40.0 -34.6,20.0"/><polygon class="fl" points="-34.6,60.0 0.0,80.0 0.0,40.0 -34.6,20.0"/><polygon class="fr" points="34.6,60.0 0.0,80.0 0.0,40.0 34.6,20.0"/></g><g class="v w "><polygon class="ft" points="-34.6,-60.0 0.0,-40.0 -34.6,-20.0 -69.3,-40.0"/><polygon class="fl" points="-69.3,0.0 -34.6,20.0 -34.6,-20.0 -69.3,-40.0"/><polygon class="fr" points="0.0,0.0 -34.6,20.0 -34.6,-20.0 0.0,-40.0"/></g><g class="v w "><polygon class="ft" points="34.6,-60.0 69.3,-40.0 34.6,-20.0 0.0,-40.0"/><polygon class="fl" points="0.0,0.0 34.6,20.0 34.6,-20.0 0.0,-40.0"/><polygon class="fr" points="69.3,0.0 34.6,20.0 34.6,-20.0 69.3,-40.0"/></g><g class="v w "><polygon class="ft" points="0.0,-40.0 34.6,-20.0 0.0,0.0 -34.6,-20.0"/><polygon class="fl" points="-34.6,20.0 0.0,40.0 0.0,0.0 -34.6,-20.0"/><polygon class="fr" points="34.6,20.0 0.0,40.0 0.0,0.0 34.6,-20.0"/></g><g class="v n pop" style="--i:0"><polygon class="ft" points="117.8,28.0 152.4,48.0 117.8,68.0 83.1,48.0"/><polygon class="fl" points="83.1,88.0 117.8,108.0 117.8,68.0 83.1,48.0"/><polygon class="fr" points="152.4,88.0 117.8,108.0 117.8,68.0 152.4,48.0"/></g><g class="v n pop" style="--i:1"><polygon class="ft" points="83.1,48.0 117.8,68.0 83.1,88.0 48.5,68.0"/><polygon class="fl" points="48.5,108.0 83.1,128.0 83.1,88.0 48.5,68.0"/><polygon class="fr" points="117.8,108.0 83.1,128.0 83.1,88.0 117.8,68.0"/></g><g class="v n pop" style="--i:2"><polygon class="ft" points="152.4,48.0 187.1,68.0 152.4,88.0 117.8,68.0"/><polygon class="fl" points="117.8,108.0 152.4,128.0 152.4,88.0 117.8,68.0"/><polygon class="fr" points="187.1,108.0 152.4,128.0 152.4,88.0 187.1,68.0"/></g><g class="v t pop" style="--i:4"><polygon class="ft" points="117.8,-12.0 152.4,8.0 117.8,28.0 83.1,8.0"/><polygon class="fl" points="83.1,48.0 117.8,68.0 117.8,28.0 83.1,8.0"/><polygon class="fr" points="152.4,48.0 117.8,68.0 117.8,28.0 152.4,8.0"/></g><g class="v n pop" style="--i:3"><polygon class="ft" points="117.8,68.0 152.4,88.0 117.8,108.0 83.1,88.0"/><polygon class="fl" points="83.1,128.0 117.8,148.0 117.8,108.0 83.1,88.0"/><polygon class="fr" points="152.4,128.0 117.8,148.0 117.8,108.0 152.4,88.0"/></g><g class="v t pop" style="--i:5"><polygon class="ft" points="83.1,8.0 117.8,28.0 83.1,48.0 48.5,28.0"/><polygon class="fl" points="48.5,68.0 83.1,88.0 83.1,48.0 48.5,28.0"/><polygon class="fr" points="117.8,68.0 83.1,88.0 83.1,48.0 117.8,28.0"/></g><g class="v t pop" style="--i:6"><polygon class="ft" points="152.4,8.0 187.1,28.0 152.4,48.0 117.8,28.0"/><polygon class="fl" points="117.8,68.0 152.4,88.0 152.4,48.0 117.8,28.0"/><polygon class="fr" points="187.1,68.0 152.4,88.0 152.4,48.0 187.1,28.0"/></g><g class="v t pop" style="--i:7"><polygon class="ft" points="117.8,28.0 152.4,48.0 117.8,68.0 83.1,48.0"/><polygon class="fl" points="83.1,88.0 117.8,108.0 117.8,68.0 83.1,48.0"/><polygon class="fr" points="152.4,88.0 117.8,108.0 117.8,68.0 152.4,48.0"/></g></svg></div>
+        </div>
+        <div class="feature flip">
+          <div class="feature-text">
+            <div class="label">02 · Environments</div>
+            <h3>3D environment development</h3>
+            <p>We build a space that feels like the place your team actually works, whether that is a production line or a lab bench.</p>
+            <ul><li>Your equipment placed in a realistic layout</li><li>Tuned to run smoothly on Meta Quest</li></ul>
+          </div>
+          <div class="panel oat"><svg class="voxels" viewBox="-183 -130 366 340" role="img" aria-label="Cube room with equipment"><g class="v n "><polygon class="ft" points="0.0,-40.0 34.6,-20.0 0.0,0.0 -34.6,-20.0"/><polygon class="fl" points="-34.6,20.0 0.0,40.0 0.0,0.0 -34.6,-20.0"/><polygon class="fr" points="34.6,20.0 0.0,40.0 0.0,0.0 34.6,-20.0"/></g><g class="v n "><polygon class="ft" points="-34.6,-20.0 0.0,0.0 -34.6,20.0 -69.3,0.0"/><polygon class="fl" points="-69.3,40.0 -34.6,60.0 -34.6,20.0 -69.3,0.0"/><polygon class="fr" points="0.0,40.0 -34.6,60.0 -34.6,20.0 0.0,0.0"/></g><g class="v n "><polygon class="ft" points="34.6,-20.0 69.3,0.0 34.6,20.0 0.0,0.0"/><polygon class="fl" points="0.0,40.0 34.6,60.0 34.6,20.0 0.0,0.0"/><polygon class="fr" points="69.3,40.0 34.6,60.0 34.6,20.0 69.3,0.0"/></g><g class="v n "><polygon class="ft" points="0.0,-80.0 34.6,-60.0 0.0,-40.0 -34.6,-60.0"/><polygon class="fl" points="-34.6,-20.0 0.0,0.0 0.0,-40.0 -34.6,-60.0"/><polygon class="fr" points="34.6,-20.0 0.0,0.0 0.0,-40.0 34.6,-60.0"/></g><g class="v n "><polygon class="ft" points="-69.3,0.0 -34.6,20.0 -69.3,40.0 -103.9,20.0"/><polygon class="fl" points="-103.9,60.0 -69.3,80.0 -69.3,40.0 -103.9,20.0"/><polygon class="fr" points="-34.6,60.0 -69.3,80.0 -69.3,40.0 -34.6,20.0"/></g><g class="v n "><polygon class="ft" points="0.0,0.0 34.6,20.0 0.0,40.0 -34.6,20.0"/><polygon class="fl" points="-34.6,60.0 0.0,80.0 0.0,40.0 -34.6,20.0"/><polygon class="fr" points="34.6,60.0 0.0,80.0 0.0,40.0 34.6,20.0"/></g><g class="v n "><polygon class="ft" points="69.3,0.0 103.9,20.0 69.3,40.0 34.6,20.0"/><polygon class="fl" points="34.6,60.0 69.3,80.0 69.3,40.0 34.6,20.0"/><polygon class="fr" points="103.9,60.0 69.3,80.0 69.3,40.0 103.9,20.0"/></g><g class="v n "><polygon class="ft" points="-34.6,-60.0 0.0,-40.0 -34.6,-20.0 -69.3,-40.0"/><polygon class="fl" points="-69.3,0.0 -34.6,20.0 -34.6,-20.0 -69.3,-40.0"/><polygon class="fr" points="0.0,0.0 -34.6,20.0 -34.6,-20.0 0.0,-40.0"/></g><g class="v n "><polygon class="ft" points="34.6,-60.0 69.3,-40.0 34.6,-20.0 0.0,-40.0"/><polygon class="fl" points="0.0,0.0 34.6,20.0 34.6,-20.0 0.0,-40.0"/><polygon class="fr" points="69.3,0.0 34.6,20.0 34.6,-20.0 69.3,-40.0"/></g><g class="v n "><polygon class="ft" points="0.0,-120.0 34.6,-100.0 0.0,-80.0 -34.6,-100.0"/><polygon class="fl" points="-34.6,-60.0 0.0,-40.0 0.0,-80.0 -34.6,-100.0"/><polygon class="fr" points="34.6,-60.0 0.0,-40.0 0.0,-80.0 34.6,-100.0"/></g><g class="v n "><polygon class="ft" points="-103.9,20.0 -69.3,40.0 -103.9,60.0 -138.6,40.0"/><polygon class="fl" points="-138.6,80.0 -103.9,100.0 -103.9,60.0 -138.6,40.0"/><polygon class="fr" points="-69.3,80.0 -103.9,100.0 -103.9,60.0 -69.3,40.0"/></g><g class="v n "><polygon class="ft" points="-34.6,20.0 0.0,40.0 -34.6,60.0 -69.3,40.0"/><polygon class="fl" points="-69.3,80.0 -34.6,100.0 -34.6,60.0 -69.3,40.0"/><polygon class="fr" points="0.0,80.0 -34.6,100.0 -34.6,60.0 0.0,40.0"/></g><g class="v n "><polygon class="ft" points="34.6,20.0 69.3,40.0 34.6,60.0 0.0,40.0"/><polygon class="fl" points="0.0,80.0 34.6,100.0 34.6,60.0 0.0,40.0"/><polygon class="fr" points="69.3,80.0 34.6,100.0 34.6,60.0 69.3,40.0"/></g><g class="v n "><polygon class="ft" points="103.9,20.0 138.6,40.0 103.9,60.0 69.3,40.0"/><polygon class="fl" points="69.3,80.0 103.9,100.0 103.9,60.0 69.3,40.0"/><polygon class="fr" points="138.6,80.0 103.9,100.0 103.9,60.0 138.6,40.0"/></g><g class="v n "><polygon class="ft" points="-69.3,-40.0 -34.6,-20.0 -69.3,0.0 -103.9,-20.0"/><polygon class="fl" points="-103.9,20.0 -69.3,40.0 -69.3,0.0 -103.9,-20.0"/><polygon class="fr" points="-34.6,20.0 -69.3,40.0 -69.3,0.0 -34.6,-20.0"/></g><g class="v n "><polygon class="ft" points="69.3,-40.0 103.9,-20.0 69.3,0.0 34.6,-20.0"/><polygon class="fl" points="34.6,20.0 69.3,40.0 69.3,0.0 34.6,-20.0"/><polygon class="fr" points="103.9,20.0 69.3,40.0 69.3,0.0 103.9,-20.0"/></g><g class="v n "><polygon class="ft" points="-34.6,-100.0 0.0,-80.0 -34.6,-60.0 -69.3,-80.0"/><polygon class="fl" points="-69.3,-40.0 -34.6,-20.0 -34.6,-60.0 -69.3,-80.0"/><polygon class="fr" points="0.0,-40.0 -34.6,-20.0 -34.6,-60.0 0.0,-80.0"/></g><g class="v n "><polygon class="ft" points="34.6,-100.0 69.3,-80.0 34.6,-60.0 0.0,-80.0"/><polygon class="fl" points="0.0,-40.0 34.6,-20.0 34.6,-60.0 0.0,-80.0"/><polygon class="fr" points="69.3,-40.0 34.6,-20.0 34.6,-60.0 69.3,-80.0"/></g><g class="v n "><polygon class="ft" points="-138.6,40.0 -103.9,60.0 -138.6,80.0 -173.2,60.0"/><polygon class="fl" points="-173.2,100.0 -138.6,120.0 -138.6,80.0 -173.2,60.0"/><polygon class="fr" points="-103.9,100.0 -138.6,120.0 -138.6,80.0 -103.9,60.0"/></g><g class="v n "><polygon class="ft" points="-69.3,40.0 -34.6,60.0 -69.3,80.0 -103.9,60.0"/><polygon class="fl" points="-103.9,100.0 -69.3,120.0 -69.3,80.0 -103.9,60.0"/><polygon class="fr" points="-34.6,100.0 -69.3,120.0 -69.3,80.0 -34.6,60.0"/></g><g class="v n "><polygon class="ft" points="0.0,40.0 34.6,60.0 0.0,80.0 -34.6,60.0"/><polygon class="fl" points="-34.6,100.0 0.0,120.0 0.0,80.0 -34.6,60.0"/><polygon class="fr" points="34.6,100.0 0.0,120.0 0.0,80.0 34.6,60.0"/></g><g class="v n "><polygon class="ft" points="69.3,40.0 103.9,60.0 69.3,80.0 34.6,60.0"/><polygon class="fl" points="34.6,100.0 69.3,120.0 69.3,80.0 34.6,60.0"/><polygon class="fr" points="103.9,100.0 69.3,120.0 69.3,80.0 103.9,60.0"/></g><g class="v n "><polygon class="ft" points="138.6,40.0 173.2,60.0 138.6,80.0 103.9,60.0"/><polygon class="fl" points="103.9,100.0 138.6,120.0 138.6,80.0 103.9,60.0"/><polygon class="fr" points="173.2,100.0 138.6,120.0 138.6,80.0 173.2,60.0"/></g><g class="v n "><polygon class="ft" points="-103.9,-20.0 -69.3,0.0 -103.9,20.0 -138.6,0.0"/><polygon class="fl" points="-138.6,40.0 -103.9,60.0 -103.9,20.0 -138.6,0.0"/><polygon class="fr" points="-69.3,40.0 -103.9,60.0 -103.9,20.0 -69.3,0.0"/></g><g class="v n "><polygon class="ft" points="103.9,-20.0 138.6,0.0 103.9,20.0 69.3,0.0"/><polygon class="fl" points="69.3,40.0 103.9,60.0 103.9,20.0 69.3,0.0"/><polygon class="fr" points="138.6,40.0 103.9,60.0 103.9,20.0 138.6,0.0"/></g><g class="v n "><polygon class="ft" points="-69.3,-80.0 -34.6,-60.0 -69.3,-40.0 -103.9,-60.0"/><polygon class="fl" points="-103.9,-20.0 -69.3,0.0 -69.3,-40.0 -103.9,-60.0"/><polygon class="fr" points="-34.6,-20.0 -69.3,0.0 -69.3,-40.0 -34.6,-60.0"/></g><g class="v n "><polygon class="ft" points="69.3,-80.0 103.9,-60.0 69.3,-40.0 34.6,-60.0"/><polygon class="fl" points="34.6,-20.0 69.3,0.0 69.3,-40.0 34.6,-60.0"/><polygon class="fr" points="103.9,-20.0 69.3,0.0 69.3,-40.0 103.9,-60.0"/></g><g class="v n "><polygon class="ft" points="-103.9,60.0 -69.3,80.0 -103.9,100.0 -138.6,80.0"/><polygon class="fl" points="-138.6,120.0 -103.9,140.0 -103.9,100.0 -138.6,80.0"/><polygon class="fr" points="-69.3,120.0 -103.9,140.0 -103.9,100.0 -69.3,80.0"/></g><g class="v n "><polygon class="ft" points="-34.6,60.0 0.0,80.0 -34.6,100.0 -69.3,80.0"/><polygon class="fl" points="-69.3,120.0 -34.6,140.0 -34.6,100.0 -69.3,80.0"/><polygon class="fr" points="0.0,120.0 -34.6,140.0 -34.6,100.0 0.0,80.0"/></g><g class="v n "><polygon class="ft" points="34.6,60.0 69.3,80.0 34.6,100.0 0.0,80.0"/><polygon class="fl" points="0.0,120.0 34.6,140.0 34.6,100.0 0.0,80.0"/><polygon class="fr" points="69.3,120.0 34.6,140.0 34.6,100.0 69.3,80.0"/></g><g class="v n "><polygon class="ft" points="103.9,60.0 138.6,80.0 103.9,100.0 69.3,80.0"/><polygon class="fl" points="69.3,120.0 103.9,140.0 103.9,100.0 69.3,80.0"/><polygon class="fr" points="138.6,120.0 103.9,140.0 103.9,100.0 138.6,80.0"/></g><g class="v n "><polygon class="ft" points="-138.6,0.0 -103.9,20.0 -138.6,40.0 -173.2,20.0"/><polygon class="fl" points="-173.2,60.0 -138.6,80.0 -138.6,40.0 -173.2,20.0"/><polygon class="fr" points="-103.9,60.0 -138.6,80.0 -138.6,40.0 -103.9,20.0"/></g><g class="v n "><polygon class="ft" points="138.6,0.0 173.2,20.0 138.6,40.0 103.9,20.0"/><polygon class="fl" points="103.9,60.0 138.6,80.0 138.6,40.0 103.9,20.0"/><polygon class="fr" points="173.2,60.0 138.6,80.0 138.6,40.0 173.2,20.0"/></g><g class="v t pop" style="--i:0"><polygon class="ft" points="0.0,0.0 34.6,20.0 0.0,40.0 -34.6,20.0"/><polygon class="fl" points="-34.6,60.0 0.0,80.0 0.0,40.0 -34.6,20.0"/><polygon class="fr" points="34.6,60.0 0.0,80.0 0.0,40.0 34.6,20.0"/></g><g class="v n "><polygon class="ft" points="-103.9,-60.0 -69.3,-40.0 -103.9,-20.0 -138.6,-40.0"/><polygon class="fl" points="-138.6,0.0 -103.9,20.0 -103.9,-20.0 -138.6,-40.0"/><polygon class="fr" points="-69.3,0.0 -103.9,20.0 -103.9,-20.0 -69.3,-40.0"/></g><g class="v n "><polygon class="ft" points="103.9,-60.0 138.6,-40.0 103.9,-20.0 69.3,-40.0"/><polygon class="fl" points="69.3,0.0 103.9,20.0 103.9,-20.0 69.3,-40.0"/><polygon class="fr" points="138.6,0.0 103.9,20.0 103.9,-20.0 138.6,-40.0"/></g><g class="v n "><polygon class="ft" points="-69.3,80.0 -34.6,100.0 -69.3,120.0 -103.9,100.0"/><polygon class="fl" points="-103.9,140.0 -69.3,160.0 -69.3,120.0 -103.9,100.0"/><polygon class="fr" points="-34.6,140.0 -69.3,160.0 -69.3,120.0 -34.6,100.0"/></g><g class="v n "><polygon class="ft" points="0.0,80.0 34.6,100.0 0.0,120.0 -34.6,100.0"/><polygon class="fl" points="-34.6,140.0 0.0,160.0 0.0,120.0 -34.6,100.0"/><polygon class="fr" points="34.6,140.0 0.0,160.0 0.0,120.0 34.6,100.0"/></g><g class="v n "><polygon class="ft" points="69.3,80.0 103.9,100.0 69.3,120.0 34.6,100.0"/><polygon class="fl" points="34.6,140.0 69.3,160.0 69.3,120.0 34.6,100.0"/><polygon class="fr" points="103.9,140.0 69.3,160.0 69.3,120.0 103.9,100.0"/></g><g class="v d pop" style="--i:1"><polygon class="ft" points="34.6,20.0 69.3,40.0 34.6,60.0 0.0,40.0"/><polygon class="fl" points="0.0,80.0 34.6,100.0 34.6,60.0 0.0,40.0"/><polygon class="fr" points="69.3,80.0 34.6,100.0 34.6,60.0 69.3,40.0"/></g><g class="v t pop" style="--i:2"><polygon class="ft" points="-34.6,20.0 0.0,40.0 -34.6,60.0 -69.3,40.0"/><polygon class="fl" points="-69.3,80.0 -34.6,100.0 -34.6,60.0 -69.3,40.0"/><polygon class="fr" points="0.0,80.0 -34.6,100.0 -34.6,60.0 0.0,40.0"/></g><g class="v n "><polygon class="ft" points="-138.6,-40.0 -103.9,-20.0 -138.6,0.0 -173.2,-20.0"/><polygon class="fl" points="-173.2,20.0 -138.6,40.0 -138.6,0.0 -173.2,-20.0"/><polygon class="fr" points="-103.9,20.0 -138.6,40.0 -138.6,0.0 -103.9,-20.0"/></g><g class="v n "><polygon class="ft" points="138.6,-40.0 173.2,-20.0 138.6,0.0 103.9,-20.0"/><polygon class="fl" points="103.9,20.0 138.6,40.0 138.6,0.0 103.9,-20.0"/><polygon class="fr" points="173.2,20.0 138.6,40.0 138.6,0.0 173.2,-20.0"/></g><g class="v n "><polygon class="ft" points="-34.6,100.0 0.0,120.0 -34.6,140.0 -69.3,120.0"/><polygon class="fl" points="-69.3,160.0 -34.6,180.0 -34.6,140.0 -69.3,120.0"/><polygon class="fr" points="0.0,160.0 -34.6,180.0 -34.6,140.0 0.0,120.0"/></g><g class="v n "><polygon class="ft" points="34.6,100.0 69.3,120.0 34.6,140.0 0.0,120.0"/><polygon class="fl" points="0.0,160.0 34.6,180.0 34.6,140.0 0.0,120.0"/><polygon class="fr" points="69.3,160.0 34.6,180.0 34.6,140.0 69.3,120.0"/></g><g class="v n "><polygon class="ft" points="0.0,120.0 34.6,140.0 0.0,160.0 -34.6,140.0"/><polygon class="fl" points="-34.6,180.0 0.0,200.0 0.0,160.0 -34.6,140.0"/><polygon class="fr" points="34.6,180.0 0.0,200.0 0.0,160.0 34.6,140.0"/></g></svg></div>
+        </div>
+        <div class="feature">
+          <div class="feature-text">
+            <div class="label">03 · Interaction</div>
+            <h3>Custom VR development and interactions</h3>
+            <p>Learners pick things up, turn controls, and work through a task one step at a time, with a hint in the scene when they get stuck.</p>
+            <ul><li>Natural interactions with the controllers</li><li>Guided, step-by-step procedures</li></ul>
+          </div>
+          <div class="panel sage"><svg class="voxels" viewBox="-149 -82 297 252" role="img" aria-label="A cube lifted above its empty slot"><g class="v n "><polygon class="ft" points="0.0,-40.0 34.6,-20.0 0.0,0.0 -34.6,-20.0"/><polygon class="fl" points="-34.6,20.0 0.0,40.0 0.0,0.0 -34.6,-20.0"/><polygon class="fr" points="34.6,20.0 0.0,40.0 0.0,0.0 34.6,-20.0"/></g><g class="v n "><polygon class="ft" points="-34.6,-20.0 0.0,0.0 -34.6,20.0 -69.3,0.0"/><polygon class="fl" points="-69.3,40.0 -34.6,60.0 -34.6,20.0 -69.3,0.0"/><polygon class="fr" points="0.0,40.0 -34.6,60.0 -34.6,20.0 0.0,0.0"/></g><g class="v n "><polygon class="ft" points="34.6,-20.0 69.3,0.0 34.6,20.0 0.0,0.0"/><polygon class="fl" points="0.0,40.0 34.6,60.0 34.6,20.0 0.0,0.0"/><polygon class="fr" points="69.3,40.0 34.6,60.0 34.6,20.0 69.3,0.0"/></g><g class="v n "><polygon class="ft" points="-69.3,0.0 -34.6,20.0 -69.3,40.0 -103.9,20.0"/><polygon class="fl" points="-103.9,60.0 -69.3,80.0 -69.3,40.0 -103.9,20.0"/><polygon class="fr" points="-34.6,60.0 -69.3,80.0 -69.3,40.0 -34.6,20.0"/></g><g class="v n "><polygon class="ft" points="0.0,0.0 34.6,20.0 0.0,40.0 -34.6,20.0"/><polygon class="fl" points="-34.6,60.0 0.0,80.0 0.0,40.0 -34.6,20.0"/><polygon class="fr" points="34.6,60.0 0.0,80.0 0.0,40.0 34.6,20.0"/></g><g class="v n "><polygon class="ft" points="69.3,0.0 103.9,20.0 69.3,40.0 34.6,20.0"/><polygon class="fl" points="34.6,60.0 69.3,80.0 69.3,40.0 34.6,20.0"/><polygon class="fr" points="103.9,60.0 69.3,80.0 69.3,40.0 103.9,20.0"/></g><g class="v n "><polygon class="ft" points="-34.6,-60.0 0.0,-40.0 -34.6,-20.0 -69.3,-40.0"/><polygon class="fl" points="-69.3,0.0 -34.6,20.0 -34.6,-20.0 -69.3,-40.0"/><polygon class="fr" points="0.0,0.0 -34.6,20.0 -34.6,-20.0 0.0,-40.0"/></g><g class="v n "><polygon class="ft" points="-103.9,20.0 -69.3,40.0 -103.9,60.0 -138.6,40.0"/><polygon class="fl" points="-138.6,80.0 -103.9,100.0 -103.9,60.0 -138.6,40.0"/><polygon class="fr" points="-69.3,80.0 -103.9,100.0 -103.9,60.0 -69.3,40.0"/></g><g class="v n "><polygon class="ft" points="-34.6,20.0 0.0,40.0 -34.6,60.0 -69.3,40.0"/><polygon class="fl" points="-69.3,80.0 -34.6,100.0 -34.6,60.0 -69.3,40.0"/><polygon class="fr" points="0.0,80.0 -34.6,100.0 -34.6,60.0 0.0,40.0"/></g><g class="v n "><polygon class="ft" points="34.6,20.0 69.3,40.0 34.6,60.0 0.0,40.0"/><polygon class="fl" points="0.0,80.0 34.6,100.0 34.6,60.0 0.0,40.0"/><polygon class="fr" points="69.3,80.0 34.6,100.0 34.6,60.0 69.3,40.0"/></g><g class="v n "><polygon class="ft" points="103.9,20.0 138.6,40.0 103.9,60.0 69.3,40.0"/><polygon class="fl" points="69.3,80.0 103.9,100.0 103.9,60.0 69.3,40.0"/><polygon class="fr" points="138.6,80.0 103.9,100.0 103.9,60.0 138.6,40.0"/></g><g class="v n "><polygon class="ft" points="0.0,-40.0 34.6,-20.0 0.0,0.0 -34.6,-20.0"/><polygon class="fl" points="-34.6,20.0 0.0,40.0 0.0,0.0 -34.6,-20.0"/><polygon class="fr" points="34.6,20.0 0.0,40.0 0.0,0.0 34.6,-20.0"/></g><g class="v n "><polygon class="ft" points="-69.3,40.0 -34.6,60.0 -69.3,80.0 -103.9,60.0"/><polygon class="fl" points="-103.9,100.0 -69.3,120.0 -69.3,80.0 -103.9,60.0"/><polygon class="fr" points="-34.6,100.0 -69.3,120.0 -69.3,80.0 -34.6,60.0"/></g><g class="v n "><polygon class="ft" points="0.0,40.0 34.6,60.0 0.0,80.0 -34.6,60.0"/><polygon class="fl" points="-34.6,100.0 0.0,120.0 0.0,80.0 -34.6,60.0"/><polygon class="fr" points="34.6,100.0 0.0,120.0 0.0,80.0 34.6,60.0"/></g><g class="v n "><polygon class="ft" points="69.3,40.0 103.9,60.0 69.3,80.0 34.6,60.0"/><polygon class="fl" points="34.6,100.0 69.3,120.0 69.3,80.0 34.6,60.0"/><polygon class="fr" points="103.9,100.0 69.3,120.0 69.3,80.0 103.9,60.0"/></g><g class="v n "><polygon class="ft" points="34.6,-20.0 69.3,0.0 34.6,20.0 0.0,0.0"/><polygon class="fl" points="0.0,40.0 34.6,60.0 34.6,20.0 0.0,0.0"/><polygon class="fr" points="69.3,40.0 34.6,60.0 34.6,20.0 69.3,0.0"/></g><g class="v n "><polygon class="ft" points="-34.6,60.0 0.0,80.0 -34.6,100.0 -69.3,80.0"/><polygon class="fl" points="-69.3,120.0 -34.6,140.0 -34.6,100.0 -69.3,80.0"/><polygon class="fr" points="0.0,120.0 -34.6,140.0 -34.6,100.0 0.0,80.0"/></g><g class="v n "><polygon class="ft" points="34.6,60.0 69.3,80.0 34.6,100.0 0.0,80.0"/><polygon class="fl" points="0.0,120.0 34.6,140.0 34.6,100.0 0.0,80.0"/><polygon class="fr" points="69.3,120.0 34.6,140.0 34.6,100.0 69.3,80.0"/></g><g class="v g "><polygon class="ft" points="69.3,0.0 103.9,20.0 69.3,40.0 34.6,20.0"/><polygon class="fl" points="34.6,60.0 69.3,80.0 69.3,40.0 34.6,20.0"/><polygon class="fr" points="103.9,60.0 69.3,80.0 69.3,40.0 103.9,20.0"/></g><g class="v n "><polygon class="ft" points="0.0,80.0 34.6,100.0 0.0,120.0 -34.6,100.0"/><polygon class="fl" points="-34.6,140.0 0.0,160.0 0.0,120.0 -34.6,100.0"/><polygon class="fr" points="34.6,140.0 0.0,160.0 0.0,120.0 34.6,100.0"/></g><g class="v t lift"><polygon class="ft" points="69.3,-72.0 103.9,-52.0 69.3,-32.0 34.6,-52.0"/><polygon class="fl" points="34.6,-12.0 69.3,8.0 69.3,-32.0 34.6,-52.0"/><polygon class="fr" points="103.9,-12.0 69.3,8.0 69.3,-32.0 103.9,-52.0"/></g></svg></div>
+        </div>
+        <div class="feature flip">
+          <div class="feature-text">
+            <div class="label">04 · Assessment</div>
+            <h3>Training assessment and scoring</h3>
+            <p>Every session ends with a clear picture of how the learner did and where they still need practice.</p>
+            <ul><li>Scores for correct steps and missed problems</li><li>Results you can export and review</li></ul>
+          </div>
+          <div class="panel fog"><svg class="voxels" viewBox="-287 -190 366 400" role="img" aria-label="Columns of cubes rising like a score chart"><g class="v n "><polygon class="ft" points="0.0,-40.0 34.6,-20.0 0.0,0.0 -34.6,-20.0"/><polygon class="fl" points="-34.6,20.0 0.0,40.0 0.0,0.0 -34.6,-20.0"/><polygon class="fr" points="34.6,20.0 0.0,40.0 0.0,0.0 34.6,-20.0"/></g><g class="v n "><polygon class="ft" points="-34.6,-20.0 0.0,0.0 -34.6,20.0 -69.3,0.0"/><polygon class="fl" points="-69.3,40.0 -34.6,60.0 -34.6,20.0 -69.3,0.0"/><polygon class="fr" points="0.0,40.0 -34.6,60.0 -34.6,20.0 0.0,0.0"/></g><g class="v n "><polygon class="ft" points="34.6,-20.0 69.3,0.0 34.6,20.0 0.0,0.0"/><polygon class="fl" points="0.0,40.0 34.6,60.0 34.6,20.0 0.0,0.0"/><polygon class="fr" points="69.3,40.0 34.6,60.0 34.6,20.0 69.3,0.0"/></g><g class="v n "><polygon class="ft" points="-69.3,0.0 -34.6,20.0 -69.3,40.0 -103.9,20.0"/><polygon class="fl" points="-103.9,60.0 -69.3,80.0 -69.3,40.0 -103.9,20.0"/><polygon class="fr" points="-34.6,60.0 -69.3,80.0 -69.3,40.0 -34.6,20.0"/></g><g class="v n "><polygon class="ft" points="0.0,0.0 34.6,20.0 0.0,40.0 -34.6,20.0"/><polygon class="fl" points="-34.6,60.0 0.0,80.0 0.0,40.0 -34.6,20.0"/><polygon class="fr" points="34.6,60.0 0.0,80.0 0.0,40.0 34.6,20.0"/></g><g class="v n pop" style="--i:6"><polygon class="ft" points="0.0,-60.0 34.6,-40.0 0.0,-20.0 -34.6,-40.0"/><polygon class="fl" points="-34.6,0.0 0.0,20.0 0.0,-20.0 -34.6,-40.0"/><polygon class="fr" points="34.6,0.0 0.0,20.0 0.0,-20.0 34.6,-40.0"/></g><g class="v n "><polygon class="ft" points="-103.9,20.0 -69.3,40.0 -103.9,60.0 -138.6,40.0"/><polygon class="fl" points="-138.6,80.0 -103.9,100.0 -103.9,60.0 -138.6,40.0"/><polygon class="fr" points="-69.3,80.0 -103.9,100.0 -103.9,60.0 -69.3,40.0"/></g><g class="v n "><polygon class="ft" points="-34.6,20.0 0.0,40.0 -34.6,60.0 -69.3,40.0"/><polygon class="fl" points="-69.3,80.0 -34.6,100.0 -34.6,60.0 -69.3,40.0"/><polygon class="fr" points="0.0,80.0 -34.6,100.0 -34.6,60.0 0.0,40.0"/></g><g class="v n pop" style="--i:7"><polygon class="ft" points="0.0,-100.0 34.6,-80.0 0.0,-60.0 -34.6,-80.0"/><polygon class="fl" points="-34.6,-40.0 0.0,-20.0 0.0,-60.0 -34.6,-80.0"/><polygon class="fr" points="34.6,-40.0 0.0,-20.0 0.0,-60.0 34.6,-80.0"/></g><g class="v n "><polygon class="ft" points="-138.6,40.0 -103.9,60.0 -138.6,80.0 -173.2,60.0"/><polygon class="fl" points="-173.2,100.0 -138.6,120.0 -138.6,80.0 -173.2,60.0"/><polygon class="fr" points="-103.9,100.0 -138.6,120.0 -138.6,80.0 -103.9,60.0"/></g><g class="v n "><polygon class="ft" points="-69.3,40.0 -34.6,60.0 -69.3,80.0 -103.9,60.0"/><polygon class="fl" points="-103.9,100.0 -69.3,120.0 -69.3,80.0 -103.9,60.0"/><polygon class="fr" points="-34.6,100.0 -69.3,120.0 -69.3,80.0 -34.6,60.0"/></g><g class="v n pop" style="--i:3"><polygon class="ft" points="-69.3,-20.0 -34.6,0.0 -69.3,20.0 -103.9,0.0"/><polygon class="fl" points="-103.9,40.0 -69.3,60.0 -69.3,20.0 -103.9,0.0"/><polygon class="fr" points="-34.6,40.0 -69.3,60.0 -69.3,20.0 -34.6,0.0"/></g><g class="v n pop" style="--i:8"><polygon class="ft" points="0.0,-140.0 34.6,-120.0 0.0,-100.0 -34.6,-120.0"/><polygon class="fl" points="-34.6,-80.0 0.0,-60.0 0.0,-100.0 -34.6,-120.0"/><polygon class="fr" points="34.6,-80.0 0.0,-60.0 0.0,-100.0 34.6,-120.0"/></g><g class="v n "><polygon class="ft" points="-173.2,60.0 -138.6,80.0 -173.2,100.0 -207.8,80.0"/><polygon class="fl" points="-207.8,120.0 -173.2,140.0 -173.2,100.0 -207.8,80.0"/><polygon class="fr" points="-138.6,120.0 -173.2,140.0 -173.2,100.0 -138.6,80.0"/></g><g class="v n "><polygon class="ft" points="-103.9,60.0 -69.3,80.0 -103.9,100.0 -138.6,80.0"/><polygon class="fl" points="-138.6,120.0 -103.9,140.0 -103.9,100.0 -138.6,80.0"/><polygon class="fr" points="-69.3,120.0 -103.9,140.0 -103.9,100.0 -69.3,80.0"/></g><g class="v n pop" style="--i:4"><polygon class="ft" points="-69.3,-60.0 -34.6,-40.0 -69.3,-20.0 -103.9,-40.0"/><polygon class="fl" points="-103.9,0.0 -69.3,20.0 -69.3,-20.0 -103.9,-40.0"/><polygon class="fr" points="-34.6,0.0 -69.3,20.0 -69.3,-20.0 -34.6,-40.0"/></g><g class="v t pop" style="--i:9"><polygon class="ft" points="0.0,-180.0 34.6,-160.0 0.0,-140.0 -34.6,-160.0"/><polygon class="fl" points="-34.6,-120.0 0.0,-100.0 0.0,-140.0 -34.6,-160.0"/><polygon class="fr" points="34.6,-120.0 0.0,-100.0 0.0,-140.0 34.6,-160.0"/></g><g class="v n "><polygon class="ft" points="-207.8,80.0 -173.2,100.0 -207.8,120.0 -242.5,100.0"/><polygon class="fl" points="-242.5,140.0 -207.8,160.0 -207.8,120.0 -242.5,100.0"/><polygon class="fr" points="-173.2,140.0 -207.8,160.0 -207.8,120.0 -173.2,100.0"/></g><g class="v n "><polygon class="ft" points="-138.6,80.0 -103.9,100.0 -138.6,120.0 -173.2,100.0"/><polygon class="fl" points="-173.2,140.0 -138.6,160.0 -138.6,120.0 -173.2,100.0"/><polygon class="fr" points="-103.9,140.0 -138.6,160.0 -138.6,120.0 -103.9,100.0"/></g><g class="v n pop" style="--i:1"><polygon class="ft" points="-138.6,20.0 -103.9,40.0 -138.6,60.0 -173.2,40.0"/><polygon class="fl" points="-173.2,80.0 -138.6,100.0 -138.6,60.0 -173.2,40.0"/><polygon class="fr" points="-103.9,80.0 -138.6,100.0 -138.6,60.0 -103.9,40.0"/></g><g class="v t pop" style="--i:5"><polygon class="ft" points="-69.3,-100.0 -34.6,-80.0 -69.3,-60.0 -103.9,-80.0"/><polygon class="fl" points="-103.9,-40.0 -69.3,-20.0 -69.3,-60.0 -103.9,-80.0"/><polygon class="fr" points="-34.6,-40.0 -69.3,-20.0 -69.3,-60.0 -34.6,-80.0"/></g><g class="v n "><polygon class="ft" points="-242.5,100.0 -207.8,120.0 -242.5,140.0 -277.1,120.0"/><polygon class="fl" points="-277.1,160.0 -242.5,180.0 -242.5,140.0 -277.1,120.0"/><polygon class="fr" points="-207.8,160.0 -242.5,180.0 -242.5,140.0 -207.8,120.0"/></g><g class="v n "><polygon class="ft" points="-173.2,100.0 -138.6,120.0 -173.2,140.0 -207.8,120.0"/><polygon class="fl" points="-207.8,160.0 -173.2,180.0 -173.2,140.0 -207.8,120.0"/><polygon class="fr" points="-138.6,160.0 -173.2,180.0 -173.2,140.0 -138.6,120.0"/></g><g class="v t pop" style="--i:2"><polygon class="ft" points="-138.6,-20.0 -103.9,0.0 -138.6,20.0 -173.2,0.0"/><polygon class="fl" points="-173.2,40.0 -138.6,60.0 -138.6,20.0 -173.2,0.0"/><polygon class="fr" points="-103.9,40.0 -138.6,60.0 -138.6,20.0 -103.9,0.0"/></g><g class="v n "><polygon class="ft" points="-207.8,120.0 -173.2,140.0 -207.8,160.0 -242.5,140.0"/><polygon class="fl" points="-242.5,180.0 -207.8,200.0 -207.8,160.0 -242.5,140.0"/><polygon class="fr" points="-173.2,180.0 -207.8,200.0 -207.8,160.0 -173.2,140.0"/></g><g class="v t pop" style="--i:0"><polygon class="ft" points="-207.8,60.0 -173.2,80.0 -207.8,100.0 -242.5,80.0"/><polygon class="fl" points="-242.5,120.0 -207.8,140.0 -207.8,100.0 -242.5,80.0"/><polygon class="fr" points="-173.2,120.0 -207.8,140.0 -207.8,100.0 -173.2,80.0"/></g></svg></div>
+        </div>
+        <div class="feature">
+          <div class="feature-text">
+            <div class="label">05 · Delivery</div>
+            <h3>Testing, revisions, and final delivery</h3>
+            <p>We test on the headset as we go and work through review rounds with your team before we hand over the finished app.</p>
+            <ul><li>An app that installs directly on Meta Quest</li><li>The full Unreal project, so you own the source</li></ul>
+          </div>
+          <div class="panel mist"><svg class="voxels" viewBox="-114 -146 228 276" role="img" aria-label="A block of cubes with the last cube dropping into place"><g class="v n "><polygon class="ft" points="0.0,-40.0 34.6,-20.0 0.0,0.0 -34.6,-20.0"/><polygon class="fl" points="-34.6,20.0 0.0,40.0 0.0,0.0 -34.6,-20.0"/><polygon class="fr" points="34.6,20.0 0.0,40.0 0.0,0.0 34.6,-20.0"/></g><g class="v n "><polygon class="ft" points="-34.6,-20.0 0.0,0.0 -34.6,20.0 -69.3,0.0"/><polygon class="fl" points="-69.3,40.0 -34.6,60.0 -34.6,20.0 -69.3,0.0"/><polygon class="fr" points="0.0,40.0 -34.6,60.0 -34.6,20.0 0.0,0.0"/></g><g class="v n "><polygon class="ft" points="34.6,-20.0 69.3,0.0 34.6,20.0 0.0,0.0"/><polygon class="fl" points="0.0,40.0 34.6,60.0 34.6,20.0 0.0,0.0"/><polygon class="fr" points="69.3,40.0 34.6,60.0 34.6,20.0 69.3,0.0"/></g><g class="v n "><polygon class="ft" points="0.0,-80.0 34.6,-60.0 0.0,-40.0 -34.6,-60.0"/><polygon class="fl" points="-34.6,-20.0 0.0,0.0 0.0,-40.0 -34.6,-60.0"/><polygon class="fr" points="34.6,-20.0 0.0,0.0 0.0,-40.0 34.6,-60.0"/></g><g class="v n "><polygon class="ft" points="-69.3,0.0 -34.6,20.0 -69.3,40.0 -103.9,20.0"/><polygon class="fl" points="-103.9,60.0 -69.3,80.0 -69.3,40.0 -103.9,20.0"/><polygon class="fr" points="-34.6,60.0 -69.3,80.0 -69.3,40.0 -34.6,20.0"/></g><g class="v n "><polygon class="ft" points="0.0,0.0 34.6,20.0 0.0,40.0 -34.6,20.0"/><polygon class="fl" points="-34.6,60.0 0.0,80.0 0.0,40.0 -34.6,20.0"/><polygon class="fr" points="34.6,60.0 0.0,80.0 0.0,40.0 34.6,20.0"/></g><g class="v n "><polygon class="ft" points="69.3,0.0 103.9,20.0 69.3,40.0 34.6,20.0"/><polygon class="fl" points="34.6,60.0 69.3,80.0 69.3,40.0 34.6,20.0"/><polygon class="fr" points="103.9,60.0 69.3,80.0 69.3,40.0 103.9,20.0"/></g><g class="v n "><polygon class="ft" points="-34.6,-60.0 0.0,-40.0 -34.6,-20.0 -69.3,-40.0"/><polygon class="fl" points="-69.3,0.0 -34.6,20.0 -34.6,-20.0 -69.3,-40.0"/><polygon class="fr" points="0.0,0.0 -34.6,20.0 -34.6,-20.0 0.0,-40.0"/></g><g class="v n "><polygon class="ft" points="34.6,-60.0 69.3,-40.0 34.6,-20.0 0.0,-40.0"/><polygon class="fl" points="0.0,0.0 34.6,20.0 34.6,-20.0 0.0,-40.0"/><polygon class="fr" points="69.3,0.0 34.6,20.0 34.6,-20.0 69.3,-40.0"/></g><g class="v t "><polygon class="ft" points="0.0,-120.0 34.6,-100.0 0.0,-80.0 -34.6,-100.0"/><polygon class="fl" points="-34.6,-60.0 0.0,-40.0 0.0,-80.0 -34.6,-100.0"/><polygon class="fr" points="34.6,-60.0 0.0,-40.0 0.0,-80.0 34.6,-100.0"/></g><g class="v n "><polygon class="ft" points="-34.6,20.0 0.0,40.0 -34.6,60.0 -69.3,40.0"/><polygon class="fl" points="-69.3,80.0 -34.6,100.0 -34.6,60.0 -69.3,40.0"/><polygon class="fr" points="0.0,80.0 -34.6,100.0 -34.6,60.0 0.0,40.0"/></g><g class="v n "><polygon class="ft" points="34.6,20.0 69.3,40.0 34.6,60.0 0.0,40.0"/><polygon class="fl" points="0.0,80.0 34.6,100.0 34.6,60.0 0.0,40.0"/><polygon class="fr" points="69.3,80.0 34.6,100.0 34.6,60.0 69.3,40.0"/></g><g class="v n "><polygon class="ft" points="-69.3,-40.0 -34.6,-20.0 -69.3,0.0 -103.9,-20.0"/><polygon class="fl" points="-103.9,20.0 -69.3,40.0 -69.3,0.0 -103.9,-20.0"/><polygon class="fr" points="-34.6,20.0 -69.3,40.0 -69.3,0.0 -34.6,-20.0"/></g><g class="v n "><polygon class="ft" points="0.0,-40.0 34.6,-20.0 0.0,0.0 -34.6,-20.0"/><polygon class="fl" points="-34.6,20.0 0.0,40.0 0.0,0.0 -34.6,-20.0"/><polygon class="fr" points="34.6,20.0 0.0,40.0 0.0,0.0 34.6,-20.0"/></g><g class="v n "><polygon class="ft" points="69.3,-40.0 103.9,-20.0 69.3,0.0 34.6,-20.0"/><polygon class="fl" points="34.6,20.0 69.3,40.0 69.3,0.0 34.6,-20.0"/><polygon class="fr" points="103.9,20.0 69.3,40.0 69.3,0.0 103.9,-20.0"/></g><g class="v t "><polygon class="ft" points="-34.6,-100.0 0.0,-80.0 -34.6,-60.0 -69.3,-80.0"/><polygon class="fl" points="-69.3,-40.0 -34.6,-20.0 -34.6,-60.0 -69.3,-80.0"/><polygon class="fr" points="0.0,-40.0 -34.6,-20.0 -34.6,-60.0 0.0,-80.0"/></g><g class="v t "><polygon class="ft" points="34.6,-100.0 69.3,-80.0 34.6,-60.0 0.0,-80.0"/><polygon class="fl" points="0.0,-40.0 34.6,-20.0 34.6,-60.0 0.0,-80.0"/><polygon class="fr" points="69.3,-40.0 34.6,-20.0 34.6,-60.0 69.3,-80.0"/></g><g class="v n "><polygon class="ft" points="0.0,40.0 34.6,60.0 0.0,80.0 -34.6,60.0"/><polygon class="fl" points="-34.6,100.0 0.0,120.0 0.0,80.0 -34.6,60.0"/><polygon class="fr" points="34.6,100.0 0.0,120.0 0.0,80.0 34.6,60.0"/></g><g class="v n "><polygon class="ft" points="-34.6,-20.0 0.0,0.0 -34.6,20.0 -69.3,0.0"/><polygon class="fl" points="-69.3,40.0 -34.6,60.0 -34.6,20.0 -69.3,0.0"/><polygon class="fr" points="0.0,40.0 -34.6,60.0 -34.6,20.0 0.0,0.0"/></g><g class="v n "><polygon class="ft" points="34.6,-20.0 69.3,0.0 34.6,20.0 0.0,0.0"/><polygon class="fl" points="0.0,40.0 34.6,60.0 34.6,20.0 0.0,0.0"/><polygon class="fr" points="69.3,40.0 34.6,60.0 34.6,20.0 69.3,0.0"/></g><g class="v t "><polygon class="ft" points="-69.3,-80.0 -34.6,-60.0 -69.3,-40.0 -103.9,-60.0"/><polygon class="fl" points="-103.9,-20.0 -69.3,0.0 -69.3,-40.0 -103.9,-60.0"/><polygon class="fr" points="-34.6,-20.0 -69.3,0.0 -69.3,-40.0 -34.6,-60.0"/></g><g class="v t "><polygon class="ft" points="0.0,-80.0 34.6,-60.0 0.0,-40.0 -34.6,-60.0"/><polygon class="fl" points="-34.6,-20.0 0.0,0.0 0.0,-40.0 -34.6,-60.0"/><polygon class="fr" points="34.6,-20.0 0.0,0.0 0.0,-40.0 34.6,-60.0"/></g><g class="v t "><polygon class="ft" points="69.3,-80.0 103.9,-60.0 69.3,-40.0 34.6,-60.0"/><polygon class="fl" points="34.6,-20.0 69.3,0.0 69.3,-40.0 34.6,-60.0"/><polygon class="fr" points="103.9,-20.0 69.3,0.0 69.3,-40.0 103.9,-60.0"/></g><g class="v n "><polygon class="ft" points="0.0,0.0 34.6,20.0 0.0,40.0 -34.6,20.0"/><polygon class="fl" points="-34.6,60.0 0.0,80.0 0.0,40.0 -34.6,20.0"/><polygon class="fr" points="34.6,60.0 0.0,80.0 0.0,40.0 34.6,20.0"/></g><g class="v t "><polygon class="ft" points="-34.6,-60.0 0.0,-40.0 -34.6,-20.0 -69.3,-40.0"/><polygon class="fl" points="-69.3,0.0 -34.6,20.0 -34.6,-20.0 -69.3,-40.0"/><polygon class="fr" points="0.0,0.0 -34.6,20.0 -34.6,-20.0 0.0,-40.0"/></g><g class="v t "><polygon class="ft" points="34.6,-60.0 69.3,-40.0 34.6,-20.0 0.0,-40.0"/><polygon class="fl" points="0.0,0.0 34.6,20.0 34.6,-20.0 0.0,-40.0"/><polygon class="fr" points="69.3,0.0 34.6,20.0 34.6,-20.0 69.3,-40.0"/></g><g class="v t land"><polygon class="ft" points="0.0,-136.0 34.6,-116.0 0.0,-96.0 -34.6,-116.0"/><polygon class="fl" points="-34.6,-76.0 0.0,-56.0 0.0,-96.0 -34.6,-116.0"/><polygon class="fr" points="34.6,-76.0 0.0,-56.0 0.0,-96.0 34.6,-116.0"/></g></svg></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block tech lines" id="process">
+    <div class="wrap">
+      <div class="center-head">
+        <div class="label">Process</div>
+        <h2>You see it <em>working</em> early</h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Scope</h3><p>We agree on scenarios, equipment, and what success looks like for learners.</p></li>
+        <li><h3>Prototype</h3><p>One scenario built end to end and running on the headset, so you can try it.</p></li>
+        <li><h3>Build</h3><p>Remaining scenarios, models, scoring, and results, with regular reviews.</p></li>
+        <li><h3>Deliver</h3><p>A tested Quest build plus the Unreal project files, ready for your team.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="work">
+    <div class="wrap">
+      <div class="center-head">
+        <div class="label">Selected work</div>
+        <h2>Presentville</h2>
+        <p class="work-intro">A narrative world built in Unreal Engine 5 for a small team, with a VR version in progress. Every level and interaction shown here is our work. Players learn by exploring and doing, just like in our training.</p>
+      </div>
+      <div class="bento">
+        <figure class="tile tile-hero"><video src="assets/cave-collect.mp4" poster="assets/cave-collect-poster.jpg" autoplay muted loop playsinline aria-label="Pointing at items in a cave shows a description card, and clicking one sends it into a sack"></video><figcaption><span class="live">Interactive</span> Point at an item, read its details, collect it</figcaption></figure>
+        <figure class="tile"><img src="assets/terrarium-above.webp" alt="An overhead view of the terrarium with rocks, trees, flowers and broad leaves" width="1100" height="639" loading="lazy"><figcaption>Environment building</figcaption></figure>
+        <figure class="tile"><img src="assets/nebula.webp" alt="An eclipse and a pink nebula over snowy mountains" width="1100" height="664" loading="lazy"><figcaption>Sky and lighting</figcaption></figure>
+        <figure class="tile tile-half"><img src="assets/chameleon-cave.webp" alt="A warm-lit cave with chameleons carved into the rock walls" width="1100" height="645" loading="lazy"><figcaption>Interior spaces</figcaption></figure>
+        <figure class="tile tile-half"><video src="assets/chameleon-tree.mp4" poster="assets/chameleon-tree-poster.jpg" autoplay muted loop playsinline aria-label="A green chameleon on a branch breathes, looks around, and flicks its tongue"></video><figcaption>Animated characters</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-band">
+    <div class="wrap">
+      <div class="closing">
+        <div>
+          <div class="label">Contact</div>
+          <h2>Have a project in mind?</h2>
+          <p>Pixelance is a small studio that builds VR training in Unreal Engine. We take your equipment and your procedures and turn them into scenes people can practice in.</p>
+          <p>You work directly with the person building your project, from the first scope call to the final build.</p>
+        </div>
+        <div class="contact">
+          <div class="contact-head">
+            <svg class="mini" viewBox="0 0 22 22" aria-hidden="true"><path fill="url(#tt)" d="M11 1.5 20 6.5 11 11.5 2 6.5Z"/><path fill="url(#tl)" d="M2 6.5 11 11.5 11 21 2 16Z"/><path fill="url(#tr)" d="M20 6.5 11 11.5 11 21 20 16Z"/></svg>
+            <div><b>Start a conversation</b><span>Tell us what your team needs to practice and what equipment is involved.</span></div>
+          </div>
+          <div class="row"><span>Email</span><a href="mailto:hello@pixelancestudio.com">hello@pixelancestudio.com</a></div>
+          <div class="row"><span>Location</span><div>New Jersey, USA · Working remotely</div></div>
+          <a class="btn primary contact-btn" href="mailto:hello@pixelancestudio.com">Email us</a>
+        </div>
+      </div>
+    </div>
+    <p class="giant" aria-hidden="true">pixelance</p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Pixelance LLC</span>
+    <span>VR and real-time 3D, built in Unreal Engine</span>
+  </div>
+</footer>
+<script>
+(function () {
+  var c = document.getElementById('field');
+  if (!c) return;
+  var ctx = c.getContext('2d');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var GEO = {"v":[[-0.5257,0.8507,0.0],[0.5257,0.8507,0.0],[-0.5257,-0.8507,0.0],[0.5257,-0.8507,0.0],[0.0,-0.5257,0.8507],[0.0,0.5257,0.8507],[0.0,-0.5257,-0.8507],[0.0,0.5257,-0.8507],[0.8507,0.0,-0.5257],[0.8507,0.0,0.5257],[-0.8507,0.0,-0.5257],[-0.8507,0.0,0.5257],[-0.809,0.5,0.309],[-0.5,0.309,0.809],[-0.309,0.809,0.5],[0.309,0.809,0.5],[0.0,1.0,0.0],[0.309,0.809,-0.5],[-0.309,0.809,-0.5],[-0.5,0.309,-0.809],[-0.809,0.5,-0.309],[-1.0,0.0,0.0],[0.5,0.309,0.809],[0.809,0.5,0.309],[-0.5,-0.309,0.809],[0.0,0.0,1.0],[-0.809,-0.5,-0.309],[-0.809,-0.5,0.309],[0.0,0.0,-1.0],[-0.5,-0.309,-0.809],[0.809,0.5,-0.309],[0.5,0.309,-0.809],[0.809,-0.5,0.309],[0.5,-0.309,0.809],[0.309,-0.809,0.5],[-0.309,-0.809,0.5],[0.0,-1.0,0.0],[-0.309,-0.809,-0.5],[0.309,-0.809,-0.5],[0.5,-0.309,-0.809],[0.809,-0.5,-0.309],[1.0,0.0,0.0]],"e":[[0,12],[0,14],[0,16],[0,18],[0,20],[1,15],[1,16],[1,17],[1,23],[1,30],[2,26],[2,27],[2,35],[2,36],[2,37],[3,32],[3,34],[3,36],[3,38],[3,40],[4,24],[4,25],[4,33],[4,34],[4,35],[5,13],[5,14],[5,15],[5,22],[5,25],[6,28],[6,29],[6,37],[6,38],[6,39],[7,17],[7,18],[7,19],[7,28],[7,31],[8,30],[8,31],[8,39],[8,40],[8,41],[9,22],[9,23],[9,32],[9,33],[9,41],[10,19],[10,20],[10,21],[10,26],[10,29],[11,12],[11,13],[11,21],[11,24],[11,27],[12,13],[12,14],[12,20],[12,21],[13,14],[13,24],[13,25],[14,15],[14,16],[15,16],[15,22],[15,23],[16,17],[16,18],[17,18],[17,30],[17,31],[18,19],[18,20],[19,20],[19,28],[19,29],[20,21],[21,26],[21,27],[22,23],[22,25],[22,33],[23,30],[23,41],[24,25],[24,27],[24,35],[25,33],[26,27],[26,29],[26,37],[27,35],[28,29],[28,31],[28,39],[29,37],[30,31],[30,41],[31,39],[32,33],[32,34],[32,40],[32,41],[33,34],[34,35],[34,36],[35,36],[36,37],[36,38],[37,38],[38,39],[38,40],[39,40],[40,41]]};
+  var fcx = 0, fcy = 0, fw = 1, fh = 1, mx = -1e4, my = -1e4, ctaB = 0, dpr, W, H, t = 0, last = 0, px = 0, py = 0, tx = 0, ty = 0, col;
+  function v(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+  function size() {
+    var r = c.getBoundingClientRect(); dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = r.width; H = r.height; c.width = W * dpr; c.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var cta = document.querySelector('.hero .cta'); ctaB = cta ? cta.getBoundingClientRect().bottom - r.top : H * 0.5;
+    var cp = document.querySelector('.hero .copy'); if (cp) { var q = cp.getBoundingClientRect(); fcx = q.left - r.left + q.width / 2; fcy = q.top - r.top + q.height / 2; fw = q.width * 0.75; fh = q.height * 0.85; }
+    col = { grid: v('--grid-line'), hi: v('--silver-hi'), mid: v('--silver-mid'), lo: v('--silver-lo'), edge: v('--silver-edge'), teal: v('--logo-a'), tealLo: v('--logo-c'), glow: v('--silver-glow'), glow0: v('--silver-glow-0'), tb: v('--logo-b'), pxT: v('--px-t'), pxL: v('--px-l'), pxR: v('--px-r'), pxTt: v('--px-tt'), pxTl: v('--px-tl'), pxTr: v('--px-tr'), pxEdge: v('--px-edge') };
+  }
+  // camera
+  function proj(x, y, z, cx, cy) { return [cx + x, cy + y, 1]; }
+
+  function grid() {
+    var cx = W / 2 + px * 30, horizon = H * 0.36, f = 420, camY = (H - horizon) / 0.9 + 60;
+    function P(x, y, z) { var s = f / (f + z); return [cx + x * s, horizon + y * s]; }
+    ctx.lineWidth = 1; ctx.strokeStyle = col.grid;
+    // sky: inside a huge geodesic sphere, slowly turning
+    var G = GEO, R = 2600, cz = 500, cyw = -200, rot = t * 0.03 + px * 0.15, tilt = 0.35 + py * 0.08;
+    var pts = G.v.map(function (v) {
+      var x = v[0] * Math.cos(rot) - v[2] * Math.sin(rot), z = v[0] * Math.sin(rot) + v[2] * Math.cos(rot), y = v[1];
+      var y2 = y * Math.cos(tilt) - z * Math.sin(tilt), z2 = y * Math.sin(tilt) + z * Math.cos(tilt);
+      return [x * R, y2 * R + cyw, z2 * R + cz];
+    });
+    for (var e = 0; e < G.e.length; e++) {
+      var p = pts[G.e[e][0]], q = pts[G.e[e][1]];
+      if (p[2] < -f * 0.55 || q[2] < -f * 0.55) continue;
+      if (p[1] > camY && q[1] > camY) continue;
+      var a = P(p[0], Math.min(p[1], camY), p[2]), b = P(q[0], Math.min(q[1], camY), q[2]);
+      var steps = 8;
+      for (var sI = 0; sI < steps; sI++) {
+        var u1 = sI / steps, u2 = (sI + 1) / steps, mxp = a[0] + (b[0] - a[0]) * (u1 + u2) / 2, myp = a[1] + (b[1] - a[1]) * (u1 + u2) / 2;
+        var dx = (mxp - fcx) / fw, dy = (myp - fcy) / fh;
+        var clear = Math.min(1, Math.max(0, Math.sqrt(dx * dx + dy * dy) - 0.55) / 0.6);
+        var nav = Math.min(1, Math.max(0, (myp - 40) / 60));
+        ctx.globalAlpha = 0.6 * clear * nav;
+        if (ctx.globalAlpha < 0.01) continue;
+        ctx.beginPath(); ctx.moveTo(a[0] + (b[0] - a[0]) * u1, a[1] + (b[1] - a[1]) * u1); ctx.lineTo(a[0] + (b[0] - a[0]) * u2, a[1] + (b[1] - a[1]) * u2); ctx.stroke();
+      }
+    }
+    // floor: dense mesh, gently rolling
+    var span = Math.max(4200, W * 3.2), rows = 36, colsN = Math.round(Math.max(60, W / 22)), depth = 3200, z0 = 30;
+    function F(x, z) { var y = camY - (Math.sin(x * 0.004 + t * 0.35) * 16 + Math.cos(z * 0.006 - t * 0.25) * 18); return P(x, y, z); }
+    for (var r = 0; r <= rows; r++) {
+      var z = z0 + Math.pow(r / rows, 1.6) * depth; ctx.beginPath();
+      for (var j = 0; j <= colsN; j++) { var p = F(-span / 2 + j / colsN * span, z); if (j) ctx.lineTo(p[0], p[1]); else ctx.moveTo(p[0], p[1]); }
+      ctx.globalAlpha = 0.75 * (1 - r / rows * 0.6); ctx.stroke();
+    }
+    for (var j2 = 0; j2 <= colsN; j2++) {
+      var x2 = -span / 2 + j2 / colsN * span; ctx.beginPath();
+      for (var r2 = 0; r2 <= rows; r2++) { var q = F(x2, z0 + Math.pow(r2 / rows, 1.6) * depth); if (r2) ctx.lineTo(q[0], q[1]); else ctx.moveTo(q[0], q[1]); }
+      ctx.globalAlpha = 0.5; ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function cube() {
+    var size = Math.min(W * 0.05, H * 0.06), cx = W / 2, base = Math.max(ctaB + size * 2.9, H * 0.72), cy = base + Math.sin(t * 0.8) * 8;
+    var yaw = t * 0.3 + px * 0.5, pitch = -0.6155 + py * 0.12;
+    var V = [];
+    for (var i = 0; i < 8; i++) {
+      var x = (i & 1 ? 1 : -1) * size, y = (i & 2 ? 1 : -1) * size, z = (i & 4 ? 1 : -1) * size;
+      var x1 = x * Math.cos(yaw) - z * Math.sin(yaw), z1 = x * Math.sin(yaw) + z * Math.cos(yaw);
+      var y1 = y * Math.cos(pitch) - z1 * Math.sin(pitch), z2 = y * Math.sin(pitch) + z1 * Math.cos(pitch);
+      V.push([x1, y1, z2]);
+    }
+    var F = [[0, 1, 3, 2, 'n', 0, 0, -1], [4, 6, 7, 5, 'n', 0, 0, 1], [0, 4, 5, 1, 'top', 0, -1, 0], [2, 3, 7, 6, 'b', 0, 1, 0], [0, 2, 6, 4, 'n', -1, 0, 0], [1, 5, 7, 3, 'n', 1, 0, 0]];
+    // glow + shadow
+    var g = ctx.createRadialGradient(cx, cy, size * 0.2, cx, cy, size * 2.2);
+    g.addColorStop(0, col.glow); g.addColorStop(1, col.glow0);
+    ctx.fillStyle = g; ctx.fillRect(cx - size * 2.2, cy - size * 2.2, size * 4.4, size * 4.4);
+    ctx.save(); ctx.globalAlpha = 0.09 - Math.sin(t * 0.8) * 0.02; ctx.fillStyle = col.lo; ctx.filter = 'blur(6px)';
+    ctx.beginPath(); ctx.ellipse(cx, base + size * 2.0, size * 1.6, size * 0.3, 0, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+    var faces = F.map(function (fc) {
+      var z = (V[fc[0]][2] + V[fc[1]][2] + V[fc[2]][2] + V[fc[3]][2]) / 4;
+      return { fc: fc, z: z };
+    }).sort(function (a, b) { return b.z - a.z; });
+    var f = 2400;
+    faces.forEach(function (o) {
+      var fc = o.fc, pts = [fc[0], fc[1], fc[2], fc[3]].map(function (k) { return proj(V[k][0], V[k][1], V[k][2], cx, cy); });
+      // face normal after rotation (approx from cross product)
+      var a = V[fc[0]], b = V[fc[1]], d = V[fc[3]];
+      var ux = b[0] - a[0], uy = b[1] - a[1], uz = b[2] - a[2], vx = d[0] - a[0], vy = d[1] - a[1], vz = d[2] - a[2];
+      var nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx;
+      var nl = Math.hypot(nx, ny, nz); nx /= nl; ny /= nl; nz /= nl;
+      if (nz > 0.02) return;
+      var light = Math.max(0, -nx * 0.45 - ny * 0.75 - nz * 0.5);
+      var gx0 = pts[0][0], gy0 = pts[0][1], gx1 = pts[2][0], gy1 = pts[2][1];
+      var gr = ctx.createLinearGradient(gx0, gy0, gx1, gy1);
+      if (fc[4] === 'top') { gr.addColorStop(0, col.teal); gr.addColorStop(1, col.tealLo); }
+      else {
+        gr.addColorStop(0, light > 0.45 ? col.hi : col.mid);
+        gr.addColorStop(0.55, light > 0.2 ? col.mid : col.lo);
+        gr.addColorStop(1, col.lo);
+      }
+      ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]);
+      for (var k = 1; k < 4; k++) ctx.lineTo(pts[k][0], pts[k][1]);
+      ctx.closePath(); ctx.fillStyle = gr; ctx.fill();
+      ctx.lineWidth = 1.2; ctx.strokeStyle = col.edge; ctx.stroke();
+    });
+  }
+
+  // pixels: a swarm of small cubes that turns a flat pixel screen into 3D shapes
+  var SH = (function () {
+    var cube = [];
+    for (var x = 0; x < 4; x++) for (var y = 0; y < 4; y++) for (var z = 0; z < 4; z++) if (x === 0 || x === 3 || y === 0 || y === 3 || z === 0 || z === 3) cube.push([x - 1.5, y - 1.5, z - 1.5]);
+    cube.sort(function (a, b) { return a[1] - b[1] || a[0] - b[0] || a[2] - b[2]; });
+    var N = cube.length, screen = [];
+    for (var r = 0; r < 7; r++) for (var c = 0; c < 8; c++) screen.push([c - 3.5, r - 3, 0]);
+    var exploded = cube.map(function (p) { return [p[0] * 1.6, p[1] * 1.6, p[2] * 1.6]; });
+    var accent = []; for (var i = 0; i < N; i++) accent.push(i < 16);
+    var delay = []; for (var k = 0; k < N; k++) delay.push(((k * 37) % N) / N * 0.25);
+    return { list: [screen, cube, exploded, cube], N: N, accent: accent, delay: delay };
+  })();
+  var push = new Float32Array(SH.N * 2);
+  function ease(x) { return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+  function pixels() {
+    var hold = 2.4, move = 1.6, cyc = hold + move, n = SH.list.length;
+    var k = Math.floor(t / cyc), ph = t - k * cyc, from = SH.list[k % n], to = SH.list[(k + 1) % n];
+    var s = Math.max(16, Math.min(30, W / 48)), gap = s * 1.06;
+    var cx = W / 2, base = Math.max(ctaB + s * 6.6, H * 0.71), cy = base + Math.sin(t * 0.7) * 6;
+    var yaw = t * 0.25 + px * 0.6, pitch = -0.5 + py * 0.15, cyaw = Math.cos(yaw), syaw = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch);
+    var items = [];
+    for (var i = 0; i < SH.N; i++) {
+      var p = from[i], q = to[i];
+      var u = ph < hold ? 0 : ease(Math.min(1, Math.max(0, (ph - hold) / move - SH.delay[i]) / 0.75));
+      var lift = Math.sin(u * Math.PI) * 0.8;
+      var x = p[0] + (q[0] - p[0]) * u, y = p[1] + (q[1] - p[1]) * u - lift, z = p[2] + (q[2] - p[2]) * u;
+      var x1 = x * cyaw - z * syaw, z1 = x * syaw + z * cyaw;
+      var y1 = y * cp - z1 * sp, z2 = y * sp + z1 * cp;
+      var sx = cx + x1 * gap, sy = cy + y1 * gap;
+      var dx = sx - mx, dy = sy - my, dd = Math.sqrt(dx * dx + dy * dy), tgt = dd < 130 ? (1 - dd / 130) * 46 : 0;
+      var ox = push[i * 2], oy = push[i * 2 + 1], nx = dd > 0.01 ? dx / dd : 0, ny = dd > 0.01 ? dy / dd : 0;
+      ox += (nx * tgt - ox) * 0.1; oy += (ny * tgt - oy) * 0.1; push[i * 2] = ox; push[i * 2 + 1] = oy;
+      items.push([sx + ox, sy + oy, z2, SH.accent[i]]);
+    }
+    items.sort(function (a, b) { return b[2] - a[2]; });
+    var w = s * 0.866, h = s / 2;
+    ctx.save(); ctx.globalAlpha = 0.07; ctx.fillStyle = col.lo; ctx.filter = 'blur(12px)';
+    ctx.beginPath(); ctx.ellipse(cx, base + gap * 4.6, gap * 4.6, gap * 0.9, 0, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+    ctx.lineWidth = 1; ctx.lineJoin = 'round'; ctx.strokeStyle = col.pxEdge;
+    for (var j = 0; j < items.length; j++) {
+      var it = items[j], bx = it[0], by = it[1] - s;
+      var top = it[3] ? col.pxTt : col.pxT, left = it[3] ? col.pxTl : col.pxL, right = it[3] ? col.pxTr : col.pxR;
+      ctx.beginPath(); ctx.moveTo(bx - w, by + h); ctx.lineTo(bx, by + s); ctx.lineTo(bx, by + 2 * s); ctx.lineTo(bx - w, by + h + s); ctx.closePath(); ctx.fillStyle = left; ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(bx + w, by + h); ctx.lineTo(bx, by + s); ctx.lineTo(bx, by + 2 * s); ctx.lineTo(bx + w, by + h + s); ctx.closePath(); ctx.fillStyle = right; ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(bx + w, by + h); ctx.lineTo(bx, by + s); ctx.lineTo(bx - w, by + h); ctx.closePath(); ctx.fillStyle = top; ctx.fill(); ctx.stroke();
+    }
+  }
+
+  function frame(now) {
+    var dt = Math.min(0.05, (now - last) / 1000 || 0); last = now;
+    if (!reduce.matches) t += dt;
+    px += (tx - px) * 0.05; py += (ty - py) * 0.05;
+    ctx.clearRect(0, 0, W, H);
+    grid();
+    requestAnimationFrame(frame);
+  }
+  size(); requestAnimationFrame(frame);
+  window.addEventListener('resize', size);
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', size);
+  var hero = c.parentElement;
+  hero.addEventListener('pointermove', function (e) { var r = hero.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; tx = mx / r.width - 0.5; ty = my / r.height - 0.5; });
+  hero.addEventListener('pointerleave', function () { tx = ty = 0; mx = my = -1e4; });
+})();
+</script>
+<script>
+(function () {
+  var hd = document.querySelector('header');
+  function on() { hd.classList.toggle('scrolled', window.scrollY > 24); }
+  on(); window.addEventListener('scroll', on, { passive: true });
+})();
+</script>
+<script>
+window.__initVR = function () {
+  var host = document.querySelector('.hero');
+  var cv = document.getElementById('twin');
+  var stage = document.querySelector('.hero .stage');
+  var svg = document.getElementById('xr-lines');
+  var items = Array.prototype.slice.call(document.querySelectorAll('.vr-panel li'));
+  var callout = document.getElementById('xr2');
+  if (!host || !cv || !stage || !window.THREE) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  var renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(24, 1, 0.1, 100);
+  scene.add(new THREE.HemisphereLight(0xffffff, 0xb8c2cc, 0.95));
+  var key = new THREE.DirectionalLight(0xffffff, 0.85); key.position.set(4, 7, 5); scene.add(key);
+  var rim = new THREE.DirectionalLight(0xD5E4F7, 0.5); rim.position.set(-6, 3, -4); scene.add(rim);
+
+  var metal = new THREE.MeshStandardMaterial({ color: 0xe8ecef, metalness: 0.3, roughness: 0.32 });
+  var darker = new THREE.MeshStandardMaterial({ color: 0xbcc4cb, metalness: 0.4, roughness: 0.38 });
+  var graphite = new THREE.MeshStandardMaterial({ color: 0x2c3136, metalness: 0.5, roughness: 0.35 });
+  var teal = new THREE.MeshStandardMaterial({ color: 0x2F6FC0, metalness: 0.35, roughness: 0.3 });
+  var glow = new THREE.MeshBasicMaterial({ color: 0x6FB0FF });
+  var edgeMat = new THREE.LineBasicMaterial({ color: 0x2F6FC0, transparent: true, opacity: 0.7 });
+
+  var rig = new THREE.Group(); scene.add(rig);
+  function add(parent, geo, mat, x, y, z, edges) {
+    var m = new THREE.Mesh(geo, mat); m.position.set(x, y, z); parent.add(m);
+    if (edges) { var e = new THREE.LineSegments(new THREE.EdgesGeometry(geo, 28), edgeMat); m.add(e); }
+    return m;
+  }
+  // abstract workbench
+  add(rig, new THREE.BoxGeometry(3.0, 0.14, 1.6), metal, 0, 0.9, 0, true);
+  add(rig, new THREE.BoxGeometry(2.6, 0.9, 1.3), darker, 0, 0.42, 0, true);
+  var cube = add(rig, new THREE.BoxGeometry(0.5, 0.5, 0.5), teal, -0.7, 1.22, 0.1, true);
+  // lab hints: a glass flask and a rack of sample tubes
+  var glass = new THREE.MeshStandardMaterial({ color: 0xCFDDEE, metalness: 0.2, roughness: 0.1, transparent: true, opacity: 0.6 });
+  var liquid = new THREE.MeshStandardMaterial({ color: 0x2F6FC0, metalness: 0.1, roughness: 0.3, emissive: 0x0F2A55, emissiveIntensity: 0.4 });
+  var fp = [[0, 0], [0.26, 0], [0.28, 0.04], [0.27, 0.16], [0.2, 0.32], [0.08, 0.46], [0.07, 0.66], [0.09, 0.7]].map(function (q) { return new THREE.Vector2(q[0], q[1]); });
+  var flask = add(rig, new THREE.LatheGeometry(fp, 40), glass, 0.05, 0.97, -0.35, false); flask.scale.setScalar(1.25);
+  var lp = [[0, 0], [0.255, 0], [0.265, 0.04], [0.255, 0.15], [0.21, 0.24], [0, 0.24]].map(function (q) { return new THREE.Vector2(q[0], q[1]); });
+  add(rig, new THREE.LatheGeometry(lp, 40), liquid, 0.05, 0.975, -0.35, false).scale.setScalar(1.25);
+  add(rig, new THREE.BoxGeometry(0.78, 0.12, 0.26), metal, 0.5, 1.03, 0.4, true);
+  add(rig, new THREE.BoxGeometry(0.78, 0.05, 0.26), metal, 0.5, 1.26, 0.4, false);
+  [-0.26, -0.09, 0.08, 0.25].forEach(function (dx, k) {
+    add(rig, new THREE.CylinderGeometry(0.05, 0.05, 0.42, 20), glass, 0.5 + dx, 1.2, 0.4, false);
+    add(rig, new THREE.CylinderGeometry(0.043, 0.043, 0.16 + k * 0.03, 20), liquid, 0.5 + dx, 1.07 + (0.16 + k * 0.03) / 2, 0.4, false);
+  });
+  var marker = add(rig, new THREE.TorusGeometry(0.34, 0.012, 8, 64), new THREE.MeshBasicMaterial({ color: 0x2F6FC0, transparent: true, opacity: 0.8 }), -0.7, 0.98, 0.1, false);
+  marker.rotation.x = Math.PI / 2;
+
+  // controller modeled after a ringless Touch Plus: rounded head, angled grip, thumbstick, two buttons, trigger
+  var ctrl = new THREE.Group(); scene.add(ctrl);
+  var shell = new THREE.MeshStandardMaterial({ color: 0xdfe3e7, metalness: 0.15, roughness: 0.35 });
+  var dark = new THREE.MeshStandardMaterial({ color: 0x23272b, metalness: 0.2, roughness: 0.5 });
+  var headG = new THREE.SphereGeometry(0.16, 40, 28); headG.scale(1, 0.62, 1.15);
+  add(ctrl, headG, shell, 0, 0, 0, false);
+  var faceG = new THREE.CylinderGeometry(0.13, 0.13, 0.01, 40); faceG.scale(1, 1, 1.12);
+  add(ctrl, faceG, dark, 0, 0.095, 0.01, false);
+  add(ctrl, new THREE.CylinderGeometry(0.022, 0.026, 0.035, 20), dark, -0.035, 0.115, 0.035, false);
+  add(ctrl, new THREE.CylinderGeometry(0.038, 0.038, 0.014, 24), shell, -0.035, 0.137, 0.035, false);
+  add(ctrl, new THREE.CylinderGeometry(0.02, 0.02, 0.012, 20), shell, 0.05, 0.106, -0.01, false);
+  add(ctrl, new THREE.CylinderGeometry(0.02, 0.02, 0.012, 20), shell, 0.04, 0.106, 0.055, false);
+  // grip hangs from a pivot tucked inside the head, so it always meets the head with no gap
+  var pivot = new THREE.Group(); pivot.position.set(0, -0.02, 0.05); pivot.rotation.x = 0.5; ctrl.add(pivot);
+  var gripG = new THREE.CylinderGeometry(0.058, 0.07, 0.42, 28);
+  gripG.scale(1, 1, 1.2);
+  add(pivot, gripG, shell, 0, -0.2, 0, false);
+  var neckG = new THREE.SphereGeometry(0.075, 24, 16); neckG.scale(1, 1, 1.2);
+  add(pivot, neckG, shell, 0, -0.01, 0, false);
+  var capG = new THREE.SphereGeometry(0.07, 24, 16); capG.scale(1, 0.7, 1.2);
+  add(pivot, capG, shell, 0, -0.42, 0, false);
+  var trig = add(ctrl, new THREE.BoxGeometry(0.05, 0.03, 0.09), dark, 0, -0.07, -0.12, false); trig.rotation.x = 0.6;
+  var tip = add(ctrl, new THREE.SphereGeometry(0.028, 16, 12), glow, 0, -0.02, -0.19, false);
+  ctrl.position.set(2.15, 0.95, 2.55); ctrl.rotation.set(0.35, -0.55, 0.1); ctrl.scale.setScalar(1.9);
+
+  // contact shadow
+  var sc = document.createElement('canvas'); sc.width = sc.height = 128;
+  var g2 = sc.getContext('2d'), gr = g2.createRadialGradient(64, 64, 4, 64, 64, 64);
+  gr.addColorStop(0, 'rgba(40,50,60,0.3)'); gr.addColorStop(1, 'rgba(40,50,60,0)'); g2.fillStyle = gr; g2.fillRect(0, 0, 128, 128);
+  var shadow = new THREE.Mesh(new THREE.PlaneGeometry(5, 3), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(sc), transparent: true, depthWrite: false }));
+  shadow.rotation.x = -Math.PI / 2; shadow.position.y = -0.02; scene.add(shadow);
+
+  var W = 0, H = 0, sx = 0, sy = 0, t = 0, last = 0, tx = 0, ty = 0, mx = 0, my = 0, active = -1, small = false;
+  function size() {
+    var r = host.getBoundingClientRect(); W = r.width; H = r.height;
+    var s = stage.getBoundingClientRect(); small = W < 860; sx = s.left - r.left + s.width * (small ? 0.34 : 0.42); sy = s.top - r.top + s.height * (small ? 0.66 : 0.6);
+    small = W < 860;
+    renderer.setSize(W, H, false); camera.aspect = W / H;
+    var dist = W < 540 ? 4.8 : small ? 3.6 : Math.max(0.8, 900 / Math.max(s.width, 400)) * 1.12;
+    camera.position.set(5.6 * dist, 4.2 * dist, 7.2 * dist); camera.lookAt(0.2, 0.9, 0);
+    camera.setViewOffset(W, H, W / 2 - sx, H / 2 - sy, W, H); camera.updateProjectionMatrix();
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    var dark = (window.matchMedia('(prefers-color-scheme: dark)').matches && document.documentElement.dataset.theme !== 'light') || document.documentElement.dataset.theme === 'dark';
+    metal.color.set(dark ? 0x6b737b : 0xe8ecef); darker.color.set(dark ? 0x454b51 : 0xbcc4cb); graphite.color.set(dark ? 0xc9cfd4 : 0x2c3136); if (typeof shell !== 'undefined') shell.color.set(dark ? 0x9aa2a9 : 0xf2f4f6);
+  }
+  var v3 = new THREE.Vector3();
+  function toScreen(obj) { obj.getWorldPosition(v3); v3.project(camera); return [(v3.x * 0.5 + 0.5) * W, (-v3.y * 0.5 + 0.5) * H]; }
+  function step() {
+    var n = items.length, slot = Math.floor(t / 1.5) % (n + 1);
+    if (slot !== active) {
+      active = slot;
+      items.forEach(function (li, i) { li.classList.toggle('done', i < active); li.classList.toggle('active', i === active); });
+    }
+  }
+  function overlay() {
+    var hr = host.getBoundingClientRect(), html = '';
+    var a = toScreen(tip);
+    var target = items[Math.min(active, items.length - 1)];
+    if (target && active < items.length) {
+      var r = target.getBoundingClientRect(), bx = r.left - hr.left + 18, by = r.top - hr.top + r.height / 2;
+      html += '<defs><linearGradient id="ray" gradientUnits="userSpaceOnUse" x1="' + a[0].toFixed(1) + '" y1="' + a[1].toFixed(1) + '" x2="' + bx.toFixed(1) + '" y2="' + by.toFixed(1) + '"><stop offset="0" stop-color="#6FB0FF" stop-opacity="0.2"/><stop offset="1" stop-color="#6FB0FF" stop-opacity="1"/></linearGradient></defs>';
+      html += '<line class="ray" x1="' + a[0].toFixed(1) + '" y1="' + a[1].toFixed(1) + '" x2="' + bx.toFixed(1) + '" y2="' + by.toFixed(1) + '"/><circle class="hit" cx="' + bx.toFixed(1) + '" cy="' + by.toFixed(1) + '" r="5"/>';
+    }
+    if (callout && !small) {
+      var c = toScreen(cube), ox = c[0] - 40, oy = c[1] - 105;
+      callout.style.transform = 'translate(' + (ox - callout.offsetWidth) + 'px,' + (oy - callout.offsetHeight / 2) + 'px)'; callout.style.opacity = '1';
+      html += '<line class="lead" x1="' + c[0].toFixed(1) + '" y1="' + c[1].toFixed(1) + '" x2="' + ox.toFixed(1) + '" y2="' + oy.toFixed(1) + '"/><circle class="dot" cx="' + c[0].toFixed(1) + '" cy="' + c[1].toFixed(1) + '" r="4"/>';
+    }
+    svg.innerHTML = html;
+  }
+  function frame(now) {
+    var dt = Math.min(0.05, (now - last) / 1000 || 0); last = now;
+    if (!reduce.matches) t += dt;
+    mx += (tx - mx) * 0.05; my += (ty - my) * 0.05;
+    rig.rotation.y = -0.15 + Math.sin(t * 0.2) * 0.12 + mx * 0.35;
+    ctrl.position.y = 0.95 + Math.sin(t * 1.1) * 0.03;
+    marker.scale.setScalar(1 + Math.sin(t * 2) * 0.06);
+    step(); renderer.render(scene, camera); overlay();
+    requestAnimationFrame(frame);
+  }
+  size(); requestAnimationFrame(frame);
+  window.addEventListener('resize', size);
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', size);
+  host.addEventListener('pointermove', function (e) { var r = host.getBoundingClientRect(); tx = (e.clientX - r.left) / r.width - 0.5; ty = (e.clientY - r.top) / r.height - 0.5; });
+  host.addEventListener('pointerleave', function () { tx = ty = 0; });
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" async onload="window.__initVR()"></script>
+<script>
+(function () {
+  var card = document.querySelector('.contact'), cube = card && card.querySelector('.contact-head .mini');
+  if (!cube || !cube.animate) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var anim = cube.animate([
+    { transform: 'none', offset: 0 },
+    { transform: 'translateY(-9px) rotate(60deg) scale(1.08)', offset: 0.35 },
+    { transform: 'translateY(0) rotate(120deg) scale(1.12, 0.9)', offset: 0.7 },
+    { transform: 'translateY(-2px) rotate(120deg) scale(0.97, 1.03)', offset: 0.85 },
+    { transform: 'rotate(120deg)', offset: 1 }
+  ], { duration: 900, easing: 'cubic-bezier(0.3, 0.7, 0.3, 1)', fill: 'both' });
+  anim.pause(); anim.currentTime = 0;
+  function go(rate) { if (reduce.matches) return; anim.playbackRate = rate; anim.play(); }
+  card.addEventListener('mouseenter', function () { go(1); });
+  card.addEventListener('mouseleave', function () { go(-1); });
+})();
+</script>
+</body>
+</html>
